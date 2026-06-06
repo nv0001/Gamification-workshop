@@ -254,6 +254,60 @@
         .note-label-cool { color: var(--accent-cool); }
         .note-label-purple { color: var(--accent-purple); }
 
+
+
+        /* === SAVE / EXPORT PANEL === */
+        .utility-bar {
+            max-width: 900px; margin: 22px auto 0; padding: 0 24px;
+        }
+        .utility-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+        }
+        .utility-title {
+            font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;
+        }
+        .utility-desc {
+            font-size: 0.84rem; color: var(--text-sec); line-height: 1.65;
+        }
+        .utility-actions {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            margin-top: 14px;
+        }
+        .utility-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 14px; border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface); color: var(--text);
+            font-size: 0.82rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .utility-btn:hover { transform: translateY(-1px); }
+        .utility-btn.fire:hover { border-color: rgba(249,115,22,0.35); }
+        .utility-btn.cool:hover { border-color: rgba(56,189,248,0.35); }
+        .utility-grid {
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px;
+        }
+        .micro-guide {
+            margin-top: 12px; padding: 12px 14px;
+            border-radius: 12px; background: rgba(255,255,255,0.025);
+            border: 1px solid var(--border);
+        }
+        .micro-guide-title {
+            font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--text-muted); font-weight: 700; margin-bottom: 8px;
+        }
+        .micro-guide p {
+            font-size: 0.8rem; color: var(--text-sec); line-height: 1.6; margin-bottom: 6px;
+        }
+        .save-status {
+            font-size: 0.78rem; color: var(--text-muted); margin-top: 12px;
+        }
+        .hidden-file-input { display: none; }
+
         /* === PRINT === */
         .print-btn {
             display: inline-flex; align-items: center; gap: 8px;
@@ -277,13 +331,55 @@
 </head>
 <body>
 
+
+<div class="utility-bar">
+    <div class="utility-card">
+        <button class="accordion-btn" onclick="toggleUtility(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:0;color:var(--text);font-family:inherit;">
+            <span style="font-size:0.9rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-sec);">💾 Сохранение и перенос работы</span>
+            <span class="accordion-arrow" style="font-size:0.85rem;color:var(--text-muted);transition:transform 0.25s;">▼</span>
+        </button>
+        <div id="utility-body" style="display:none;margin-top:16px;">
+            <div class="utility-grid">
+                <div>
+                    <div class="utility-desc">Воркбук хранит ваши ответы в браузере. Можно скачать прогресс, отправить себе и открыть на другом устройстве.</div>
+                    <div class="utility-actions">
+                        <button class="utility-btn fire" onclick="exportProgress()">💾 Скачать прогресс (.json)</button>
+                        <button class="utility-btn cool" onclick="document.getElementById('import-progress-file').click()">📥 Загрузить прогресс (.json)</button>
+                        <button class="utility-btn fire" onclick="exportFilledHtml()">📝 Экспортировать результат (.html)</button>
+                        <button class="utility-btn cool" onclick="exportPlainText()">📄 Экспортировать результат (.txt)</button>
+                        <button class="utility-btn" onclick="resetWorkbookData()">♻️ Сбросить всё</button>
+                        <button class="print-btn" onclick="window.print()">🖨 Распечатать / PDF</button>
+                    </div>
+                    <div id="save-status" class="save-status">Автосохранение включено.</div>
+                    <input id="import-progress-file" class="hidden-file-input" type="file" accept=".json,application/json" onchange="importProgress(event)">
+                </div>
+                <div>
+                    <div class="micro-guide">
+                        <div class="micro-guide-title">Мини-гайд: перенос на другое устройство</div>
+                        <p>1. Нажмите <strong>«Скачать прогресс (.json)»</strong>.</p>
+                        <p>2. Отправьте файл себе на почту или в мессенджер.</p>
+                        <p>3. На другом устройстве откройте этот же воркбук и нажмите <strong>«Загрузить прогресс (.json)»</strong>.</p>
+                    </div>
+                    <div class="micro-guide">
+                        <div class="micro-guide-title">Мини-гайд: как открыть HTML в Word</div>
+                        <p>1. Нажмите <strong>«Экспортировать результат (.html)»</strong>.</p>
+                        <p>2. Сохраните файл на устройство.</p>
+                        <p>3. Откройте Word → <strong>Файл → Открыть</strong> → выберите этот HTML-файл.</p>
+                        <p>4. При необходимости сразу сохраните его как <strong>.docx</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="tabs-bar">
     <button class="tab-btn section-games active" onclick="switchTab('ig-guide')">🔥 Гайд: Игрофикация</button>
-    <button class="tab-btn section-games" onclick="switchTab('ig-check')">✅ Чек-лист: Игрофикация</button>
     <button class="tab-btn section-games" onclick="switchTab('ig-wb')">📓 Тетрадь: Игрофикация</button>
+    <button class="tab-btn section-games" onclick="switchTab('ig-check')">✅ Чек-лист: Игрофикация</button>
     <button class="tab-btn section-gamif" onclick="switchTab('gm-guide')">🌊 Гайд: Геймификация</button>
-    <button class="tab-btn section-gamif" onclick="switchTab('gm-check')">✅ Чек-лист: Геймификация</button>
     <button class="tab-btn section-gamif" onclick="switchTab('gm-wb')">📓 Тетрадь: Геймификация</button>
+    <button class="tab-btn section-gamif" onclick="switchTab('gm-check')">✅ Чек-лист: Геймификация</button>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -627,15 +723,7 @@
 
     <div class="wb-block">
         <div class="wb-label">Формат игры</div>
-        <select class="wb-field wb-field-fire" style="cursor:pointer">
-            <option value="">— выберите формат —</option>
-            <option>Ролевая симуляция (диалог + решение)</option>
-            <option>Кейс-игра с раундами</option>
-            <option>Настольная игра с картами/жетонами</option>
-            <option>Пресс-конференция / переговоры</option>
-            <option>Суд / дебаты</option>
-            <option>Другой формат</option>
-        </select>
+        <textarea class="wb-field wb-field-fire" rows="2" placeholder="Ролевая симуляция, кейс-игра с раундами, настольная игра с картами/жетонами, переговоры, суд/дебаты, свой формат..."></textarea>
     </div>
     <div class="wb-block">
         <div class="wb-label">Как игра реагирует на решения? (система последствий)</div>
@@ -1018,28 +1106,211 @@
 </div>
 
 <script>
-function switchTab(id) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+const STORAGE_KEY = 'igrofication_gamification_workbook_state_v2';
+
+function getState() {
+    try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { activeTab: 'ig-guide', fields: {}, checks: {}, accordions: {} };
+    } catch (e) {
+        return { activeTab: 'ig-guide', fields: {}, checks: {}, accordions: {} };
+    }
+}
+
+function setStatus(text) {
+    const el = document.getElementById('save-status');
+    if (el) el.textContent = text;
+}
+
+function saveState() {
+    const state = getState();
+    state.activeTab = document.querySelector('.section.active')?.id || 'ig-guide';
+
+    document.querySelectorAll('.wb-field').forEach((field, index) => {
+        field.dataset.persistId = field.dataset.persistId || 'field-' + index;
+        state.fields[field.dataset.persistId] = field.value;
+    });
+
+    document.querySelectorAll('.checklist li').forEach((item, index) => {
+        item.dataset.persistId = item.dataset.persistId || 'check-' + index;
+        state.checks[item.dataset.persistId] = item.classList.contains('checked');
+    });
+
+    document.querySelectorAll('.accordion').forEach((acc, index) => {
+        acc.dataset.persistId = acc.dataset.persistId || 'acc-' + index;
+        const btn = acc.querySelector('.accordion-btn');
+        state.accordions[acc.dataset.persistId] = btn.classList.contains('open');
+    });
+
+    state.savedAt = new Date().toLocaleString('ru-RU');
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    setStatus('Автосохранено: ' + state.savedAt);
+}
+
+function restoreState() {
+    const state = getState();
+
+    if (state.activeTab) switchTab(state.activeTab, true);
+
+    document.querySelectorAll('.wb-field').forEach((field, index) => {
+        field.dataset.persistId = field.dataset.persistId || 'field-' + index;
+        if (state.fields && Object.prototype.hasOwnProperty.call(state.fields, field.dataset.persistId)) {
+            field.value = state.fields[field.dataset.persistId];
+        }
+    });
+
+    document.querySelectorAll('.checklist li').forEach((item, index) => {
+        item.dataset.persistId = item.dataset.persistId || 'check-' + index;
+        const shouldCheck = !!(state.checks && state.checks[item.dataset.persistId]);
+        item.classList.toggle('checked', shouldCheck);
+    });
+
+    document.querySelectorAll('.accordion').forEach((acc, index) => {
+        acc.dataset.persistId = acc.dataset.persistId || 'acc-' + index;
+        const shouldOpen = !!(state.accordions && state.accordions[acc.dataset.persistId]);
+        const btn = acc.querySelector('.accordion-btn');
+        const body = acc.querySelector('.accordion-body');
+        btn.classList.toggle('open', shouldOpen);
+        body.classList.toggle('open', shouldOpen);
+    });
+
+    if (state.savedAt) setStatus('Восстановлено из автосохранения: ' + state.savedAt);
+}
+
+function switchTab(id, skipSave = false) {
+    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    const idx = ['ig-guide','ig-check','ig-wb','gm-guide','gm-check','gm-wb'].indexOf(id);
-    document.querySelectorAll('.tab-btn')[idx].classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const btn = [...document.querySelectorAll('.tab-btn')].find(b => b.getAttribute('onclick')?.includes("'" + id + "'"));
+    if (btn) btn.classList.add('active');
+    if (!skipSave) saveState();
 }
 
 function toggleAccordion(btn) {
-    const body = btn.nextElementSibling;
     btn.classList.toggle('open');
-    body.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+    saveState();
 }
 
-function toggleCheck(li) {
-    li.classList.toggle('checked');
+function toggleCheck(item) {
+    item.classList.toggle('checked');
+    saveState();
 }
 
-// Open first accordion in each section by default
-document.querySelectorAll('.accordion-btn.open').forEach(btn => {
-    btn.nextElementSibling.classList.add('open');
+function exportProgress() {
+    saveState();
+    const state = getState();
+    state.exportType = 'workbook-progress';
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json;charset=utf-8' });
+    downloadBlob(blob, 'workbook-progress.json');
+}
+
+function importProgress(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const parsed = JSON.parse(e.target.result);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+            restoreState();
+            setStatus('Прогресс загружен. Можно продолжать работу.');
+            alert('Прогресс загружен. Воркбук восстановлен.');
+        } catch (err) {
+            alert('Не удалось прочитать файл прогресса. Проверьте, что это JSON, скачанный из этого воркбука.');
+        }
+        event.target.value = '';
+    };
+    reader.readAsText(file, 'utf-8');
+}
+
+function exportPlainText() {
+    const lines = [];
+    lines.push('Игрофикация и Геймификация — экспорт результата');
+    lines.push('');
+
+    document.querySelectorAll('.section').forEach(section => {
+        const title = section.querySelector('.section-title')?.innerText?.trim();
+        if (title) {
+            lines.push('=== ' + title + ' ===');
+        }
+        section.querySelectorAll('.wb-label').forEach(label => {
+            const field = label.nextElementSibling;
+            if (field && field.classList.contains('wb-field')) {
+                const value = (field.value || '').trim();
+                lines.push(label.innerText.trim());
+                lines.push(value ? value : '[пусто]');
+                lines.push('');
+            }
+        });
+        section.querySelectorAll('.checklist li.checked').forEach(item => {
+            lines.push('[x] ' + item.innerText.replace(/\s+/g, ' ').trim());
+        });
+        if (section.querySelectorAll('.checklist li.checked').length) lines.push('');
+    });
+
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    downloadBlob(blob, 'workbook-result.txt');
+}
+
+function exportFilledHtml() {
+    saveState();
+    const clone = document.documentElement.cloneNode(true);
+
+    clone.querySelectorAll('.wb-field').forEach((field, index) => {
+        const original = document.querySelectorAll('.wb-field')[index];
+        if (field.tagName === 'TEXTAREA') {
+            field.textContent = original.value;
+        } else {
+            field.setAttribute('value', original.value);
+        }
+    });
+
+    clone.querySelectorAll('.utility-bar, .tabs-bar, .print-btn, .hidden-file-input').forEach(el => el.remove());
+    clone.querySelectorAll('script').forEach(el => el.remove());
+
+    const exportNote = document.createElement('div');
+    exportNote.innerHTML = '<div style="max-width:900px;margin:24px auto 0;padding:0 24px;color:#94a3b8;font-family:Plus Jakarta Sans,sans-serif;font-size:14px;line-height:1.6;">Экспортированная версия воркбука. Этот HTML-файл можно открыть в браузере или через Word: Файл → Открыть → выбрать HTML, затем при необходимости сохранить как .docx.</div>';
+    clone.body.insertBefore(exportNote, clone.body.firstChild);
+
+    clone.querySelectorAll('.section').forEach(sec => sec.classList.add('active'));
+
+    const blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], { type: 'text/html;charset=utf-8' });
+    downloadBlob(blob, 'workbook-filled.html');
+}
+
+function resetWorkbookData() {
+    if (!confirm('Сбросить все сохранённые ответы, чекбоксы и открытые состояния? Это действие нельзя отменить.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+}
+
+function downloadBlob(blob, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        URL.revokeObjectURL(a.href);
+        a.remove();
+    }, 300);
+}
+
+
+function toggleUtility(btn) {
+    const body = document.getElementById('utility-body');
+    const arrow = btn.querySelector('.accordion-arrow');
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : 'block';
+    if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('wb-field')) saveState();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    restoreState();
 });
 </script>
 </body>
