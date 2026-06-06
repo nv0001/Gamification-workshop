@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игрофикация и Геймификация — Мастер-класс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-deep: #070e1c;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-sec: #94a3b8;
+            --text-muted: #64748b;
+            --accent-fire: #f97316;
+            --accent-glow: #fb923c;
+            --accent-cool: #38bdf8;
+            --accent-purple: #a78bfa;
+            --accent-green: #4ade80;
+            --border: rgba(255,255,255,0.07);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* === TABS === */
+        .tabs-bar {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(7,14,28,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex; overflow-x: auto;
+            padding: 0 24px;
+            gap: 4px;
+        }
+        .tabs-bar::-webkit-scrollbar { height: 3px; }
+        .tabs-bar::-webkit-scrollbar-thumb { background: var(--accent-fire); }
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 14px 20px;
+            font-size: 0.82rem; font-weight: 600;
+            letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--text-muted);
+            background: none; border: none; cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: var(--text); }
+        .tab-btn.active {
+            color: var(--accent-fire);
+            border-bottom-color: var(--accent-fire);
+        }
+        .tab-btn.section-games.active { color: #f97316; border-bottom-color: #f97316; }
+        .tab-btn.section-gamif.active { color: #38bdf8; border-bottom-color: #38bdf8; }
+
+        /* === SECTIONS === */
+        .section { display: none; max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+        .section.active { display: block; }
+
+        /* === SECTION HEADER === */
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px; border-radius: 99px;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .badge-fire { background: rgba(249,115,22,0.12); color: var(--accent-fire); border: 1px solid rgba(249,115,22,0.25); }
+        .badge-cool { background: rgba(56,189,248,0.12); color: var(--accent-cool); border: 1px solid rgba(56,189,248,0.25); }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 900; line-height: 1.15;
+            margin-bottom: 12px;
+        }
+        .gradient-fire { background: linear-gradient(135deg, #f97316, #fb923c, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-cool { background: linear-gradient(135deg, #38bdf8, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .section-subtitle {
+            font-size: 1.05rem; color: var(--text-sec); line-height: 1.7;
+            margin-bottom: 40px; max-width: 700px;
+        }
+
+        /* === DIVIDERS === */
+        .divider {
+            display: flex; align-items: center; gap: 16px;
+            margin: 44px 0 32px;
+        }
+        .divider-line { flex: 1; height: 1px; background: var(--border); }
+        .divider-label {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-muted); white-space: nowrap;
+        }
+
+        /* === CARDS === */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px; padding: 28px 32px;
+            margin-bottom: 16px;
+        }
+        .card-head {
+            display: flex; align-items: flex-start; gap: 16px;
+            margin-bottom: 16px;
+        }
+        .card-icon {
+            font-size: 1.6rem; line-height: 1;
+            flex-shrink: 0; margin-top: 2px;
+        }
+        .card-title {
+            font-size: 1.05rem; font-weight: 700;
+            margin-bottom: 4px; line-height: 1.3;
+        }
+        .card-desc {
+            font-size: 0.9rem; color: var(--text-sec); line-height: 1.65;
+        }
+        .card-body {
+            font-size: 0.9rem; color: var(--text-sec); line-height: 1.7;
+        }
+
+        /* === ACCORDION === */
+        .accordion { margin-bottom: 12px; }
+        .accordion-btn {
+            width: 100%; text-align: left;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 18px 24px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem; font-weight: 600; color: var(--text);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.2s;
+        }
+        .accordion-btn:hover { background: rgba(255,255,255,0.04); }
+        .accordion-btn.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
+        .accordion-arrow { font-size: 0.85rem; color: var(--text-muted); transition: transform 0.25s; }
+        .accordion-btn.open .accordion-arrow { transform: rotate(180deg); }
+        .accordion-body {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-top: none;
+            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
+            padding: 20px 24px; display: none;
+        }
+        .accordion-body.open { display: block; }
+
+        /* === STEPS === */
+        .steps { display: flex; flex-direction: column; gap: 0; }
+        .step {
+            display: flex; gap: 20px; position: relative;
+        }
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute; left: 19px; top: 48px;
+            width: 2px; bottom: 0;
+            background: var(--border);
+        }
+        .step-num {
+            flex-shrink: 0; width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 700;
+            position: relative; z-index: 1;
+            margin-top: 4px;
+        }
+        .step-num-fire { background: rgba(249,115,22,0.15); color: var(--accent-fire); border: 1px solid rgba(249,115,22,0.3); }
+        .step-num-cool { background: rgba(56,189,248,0.15); color: var(--accent-cool); border: 1px solid rgba(56,189,248,0.3); }
+        .step-content { padding: 6px 0 28px; flex: 1; }
+        .step-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 6px; }
+        .step-body { font-size: 0.875rem; color: var(--text-sec); line-height: 1.65; }
+        .step-example {
+            margin-top: 10px; padding: 10px 14px;
+            background: rgba(255,255,255,0.03); border-left: 3px solid;
+            border-radius: 4px; font-size: 0.82rem; color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .step-example-fire { border-color: var(--accent-fire); }
+        .step-example-cool { border-color: var(--accent-cool); }
+
+        /* === CHECKLIST === */
+        .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .checklist li {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 14px 18px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .checklist li:hover { background: rgba(255,255,255,0.04); }
+        .checklist li.checked { opacity: 0.55; }
+        .check-box {
+            width: 22px; height: 22px; flex-shrink: 0;
+            border-radius: 6px; border: 2px solid var(--text-muted);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; transition: all 0.2s; margin-top: 1px;
+        }
+        .checklist li.checked .check-box-fire { background: var(--accent-fire); border-color: var(--accent-fire); color: #fff; }
+        .checklist li.checked .check-box-cool { background: var(--accent-cool); border-color: var(--accent-cool); color: #fff; }
+        .check-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-sec); flex: 1; }
+        .check-label { font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; font-size: 0.9rem; }
+        .checklist li.checked .check-text { text-decoration: line-through; }
+
+        /* === WORKBOOK === */
+        .wb-block { margin-bottom: 28px; }
+        .wb-label {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--text-muted); margin-bottom: 8px;
+        }
+        .wb-field {
+            width: 100%; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border); border-radius: 10px;
+            padding: 14px 18px; color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem; line-height: 1.6; resize: vertical;
+            transition: border-color 0.2s;
+        }
+        .wb-field:focus { outline: none; }
+        .wb-field-fire:focus { border-color: rgba(249,115,22,0.5); }
+        .wb-field-cool:focus { border-color: rgba(56,189,248,0.5); }
+        .wb-field::placeholder { color: var(--text-muted); }
+        .wb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .wb-tip {
+            font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;
+            line-height: 1.5; font-style: italic;
+        }
+        .wb-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .wb-matrix-cell {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+            border-radius: 10px; padding: 14px 16px;
+        }
+        .wb-matrix-title {
+            font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 8px;
+        }
+        .title-fire { color: var(--accent-fire); }
+        .title-cool { color: var(--accent-cool); }
+        .title-green { color: var(--accent-green); }
+        .title-purple { color: var(--accent-purple); }
+
+        /* === DANGER/NOTE BOXES === */
+        .note-box {
+            padding: 16px 20px; border-radius: 12px;
+            font-size: 0.875rem; line-height: 1.7; margin-bottom: 16px;
+        }
+        .note-fire { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); }
+        .note-cool { background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2); }
+        .note-purple { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+        .note-label { font-weight: 700; margin-right: 6px; }
+        .note-label-fire { color: var(--accent-fire); }
+        .note-label-cool { color: var(--accent-cool); }
+        .note-label-purple { color: var(--accent-purple); }
+
+        /* === PRINT === */
+        .print-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 32px; padding: 10px 20px;
+            border-radius: 99px; border: 1px solid var(--border);
+            background: var(--surface); color: var(--text-sec);
+            font-size: 0.82rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .print-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+        @media (max-width: 600px) {
+            .wb-grid, .wb-matrix { grid-template-columns: 1fr; }
+            .section { padding: 32px 16px 60px; }
+        }
+        @media print {
+            .tabs-bar, .print-btn { display: none; }
+            .section { display: block !important; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="tabs-bar">
+    <button class="tab-btn section-games active" onclick="switchTab('ig-guide')">🔥 Гайд: Игрофикация</button>
+    <button class="tab-btn section-games" onclick="switchTab('ig-check')">✅ Чек-лист: Игрофикация</button>
+    <button class="tab-btn section-games" onclick="switchTab('ig-wb')">📓 Тетрадь: Игрофикация</button>
+    <button class="tab-btn section-gamif" onclick="switchTab('gm-guide')">🌊 Гайд: Геймификация</button>
+    <button class="tab-btn section-gamif" onclick="switchTab('gm-check')">✅ Чек-лист: Геймификация</button>
+    <button class="tab-btn section-gamif" onclick="switchTab('gm-wb')">📓 Тетрадь: Геймификация</button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ИГРОФИКАЦИЯ — ГАЙД
+     ═══════════════════════════════════════════ -->
+<div id="ig-guide" class="section active">
+    <div class="section-badge badge-fire">🔥 Игрофикация</div>
+    <div class="section-title gradient-fire">Гайд: Игрофикация курса</div>
+    <div class="section-subtitle">Превращаем учебный модуль в игру — не ради веселья, а ради настоящего педагогического опыта.</div>
+
+    <div class="note-box note-fire">
+        <span class="note-label note-label-fire">Ключевой тезис.</span>
+        Игра — это эволюционный симулятор реальности. Детёныши животных играют не для развлечения: они отрабатывают поведение, где цена ошибки снижена до нуля, но нейронный опыт — настоящий. Игрофикация берёт эту логику и применяет к учебному материалу: создаёт безопасную песочницу, где студент <em>действует</em> и <em>переживает последствия</em>, а не слушает лекцию.
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Что это такое</div><div class="divider-line"></div></div>
+
+    <div class="card">
+        <div class="card-head">
+            <div class="card-icon">🎭</div>
+            <div>
+                <div class="card-title">Игрофикация ≠ «игра на паре»</div>
+                <div class="card-desc">Игрофикация — это создание полноценного <strong>игрового пространства</strong> (магического круга), внутри которого <em>обучение происходит через механику самой игры</em>. Контент перестаёт быть объектом передачи — он становится средой, в которой игрок принимает решения.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div class="card-icon">🎲</div>
+            <div>
+                <div class="card-title">Спектр форматов: от простого к сложному</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <strong style="color: var(--accent-fire);">Уровень 1 — Симуляция ситуации</strong><br>
+            Пресс-конференция по курсу «Основы PR» (половина группы — журналисты, половина — спикеры). Дебаты. Переговоры. Суд присяжных по кейсу.<br><br>
+            <strong style="color: var(--accent-fire);">Уровень 2 — Кейс-игра</strong><br>
+            Студенты получают роли, закрытые вводные и ресурсы. Есть конфликт и цель. Игра разворачивается через принятие решений по раундам.<br><br>
+            <strong style="color: var(--accent-fire);">Уровень 3 — Настольная или ролевая игра</strong><br>
+            Полноценная механика: карты, жетоны, кубики или словесная система. Может быть разработана под конкретный курс. Часто используется для отработки сложных процессов (Scrum, переговоры, антикризис).<br><br>
+            <strong style="color: var(--accent-fire);">Уровень 4 — Иммерсивная / павильонная игра</strong><br>
+            LARP-формат, городские квесты, «живые» ролевые на несколько часов. Максимальное погружение — студент буквально проживает ситуацию.
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Принципы игрофикации</div><div class="divider-line"></div></div>
+
+    <div class="accordion">
+        <button class="accordion-btn open" onclick="toggleAccordion(this)">
+            1. Магический круг: игра — это отдельный мир
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body open">
+            <p class="card-body">У игры должны быть <strong>чёткие границы</strong>: где начинается игровое пространство и где оно заканчивается. Студент должен понимать, что внутри круга — другие правила, другие роли, другая логика последствий. Нарушение круга (выход из роли без причины, насмешки над игрой) разрушает механику.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            2. Конфликт и дефицит — сердце игры
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body">Без конфликта нет игры — есть театральная постановка. Конфликт = столкновение интересов или ресурсов. Дефицит = недостаток времени, денег, информации или хода. Именно давление дефицита заставляет мозг работать и принимать реальные решения, а не «правильные» академические ответы.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            3. Асимметрия информации
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body">Каждый игрок знает своё, но не знает всей картины. Это воспроизводит реальность: в жизни ни у кого нет полного набора данных. Асимметрия создаёт коммуникацию, переговоры и ошибки — всё то, чему мы хотим научить.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            4. Последствия без оценки
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body">Самое важное правило: в образовательной игре <strong>нельзя ставить оценки за ход игры</strong>. Оценка убивает риск, а без риска нет обучения. Последствия должны исходить от <em>самой системы</em> (проект провалился, заказчик ушёл, бюджет кончился), а не от преподавателя. Оценивается только <em>рефлексия после игры</em>.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            5. Дебрифинг — 70% ценности игры
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body">Большинство преподавателей недооценивают дебрифинг. Именно <em>после</em> игры, когда студенты выходят из роли и обсуждают «почему я так поступил?», происходит настоящее осмысление. Без дебрифинга игра остаётся развлечением. Формат: что произошло → почему именно так → что это означает для реальной практики.</p>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаги проектирования</div><div class="divider-line"></div></div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num step-num-fire">1</div>
+            <div class="step-content">
+                <div class="step-title">Сформулировать учебный конфликт</div>
+                <div class="step-body">Не «мы изучаем антикризисные коммуникации», а «компания только что облажалась в прямом эфире — что делают PR-менеджер, CEO и журналист?». Конфликт должен быть <em>неоднозначным</em>: чтобы у разных ролей были реально разные правильные ответы.</div>
+                <div class="step-example step-example-fire">Пример: «Заказчик хочет фичу к утру. Лид-разработчик знает, что в коде критический баг. Менеджер не знает ни того, ни другого.»</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num step-num-fire">2</div>
+            <div class="step-content">
+                <div class="step-title">Определить роли с разными интересами</div>
+                <div class="step-body">Каждая роль должна иметь свою <em>закрытую карточку с целью и ограничениями</em>. Роли не должны быть симметричны. У одного — ресурс, у другого — информация, у третьего — полномочия. Ни у кого нет всего сразу.</div>
+                <div class="step-example step-example-fire">Пример ролей: Заказчик (знает, что контракт разрывается, если нет релиза). Разработчик (знает, что баг есть). PM (не знает ни того, ни другого, но должен принять решение).</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num step-num-fire">3</div>
+            <div class="step-content">
+                <div class="step-title">Задать ресурсы и дефицит</div>
+                <div class="step-body">Что ограничено? Время (таймер), деньги (жетоны), раунды, количество вопросов, которые можно задать. Дефицит — это давление, которое делает игру настоящей. Без него студенты бесконечно переговариваются и ничего не решают.</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num step-num-fire">4</div>
+            <div class="step-content">
+                <div class="step-title">Спроектировать систему последствий</div>
+                <div class="step-body">Как игра реагирует на решения? Это могут быть карточки-события («если вы выбрали X — разработчик выгорел, -1 неделя»), изменение доступных ресурсов или просто нарратив мастера игры. Главное — последствия должны быть <em>логичными и ощутимыми</em>.</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num step-num-fire">5</div>
+            <div class="step-content">
+                <div class="step-title">Запланировать дебрифинг (обязательно)</div>
+                <div class="step-body">Заложите на дебрифинг не менее 20% общего времени игры. Три вопроса: <strong>Что случилось?</strong> (фактически) → <strong>Почему?</strong> (механика решений) → <strong>Как это работает в реальности?</strong> (трансфер знаний).</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ловушка 1.</span>
+        Слишком сложные правила. Если студенты час учат правила игры — это провал. Правила должны умещаться на одной карточке.
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ловушка 2.</span>
+        Оценка за игру. Убивает смелость и желание рисковать. Никогда не ставим оценку за ход игры — только за рефлексию.
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ловушка 3.</span>
+        Нет дебрифинга. «Поиграли — и ладно.» Без разбора игра остаётся аттракционом.
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ловушка 4.</span>
+        Преподаватель — судья. В образовательной игре преподаватель — мастер, фасилитатор. Он не оценивает правильность решений, он управляет последствиями.
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ИГРОФИКАЦИЯ — ЧЕК-ЛИСТ
+     ═══════════════════════════════════════════ -->
+<div id="ig-check" class="section">
+    <div class="section-badge badge-fire">🔥 Игрофикация</div>
+    <div class="section-title gradient-fire">Чек-лист: готова ли игра?</div>
+    <div class="section-subtitle">Пройдите по пунктам перед тем, как запускать игровую сессию в группе. Кликайте — чтобы отмечать.</div>
+
+    <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Дизайн игры</div><div class="divider-line"></div></div>
+
+    <ul class="checklist" id="ig-cl-1">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Учебная цель сформулирована</span>
+                Я знаю, какой навык / понимание студент должен получить именно через эту игру, а не через лекцию.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Конфликт неоднозначен</span>
+                Нет единственно правильного ответа. У разных ролей — реально разные интересы.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Роли с асимметрией информации</span>
+                Каждый игрок получил закрытую карточку. Никто не знает всей картины.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Есть дефицит</span>
+                Время, деньги, раунды, количество ходов — что-то ограничено и это ощутимо.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Правила на одной карточке</span>
+                Механику можно объяснить за 3–5 минут. Студенты не тратят больше 10 минут на вход.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Последствия от системы, не от меня</span>
+                Я как преподаватель не говорю «ты неправильно сделал». Система сама показывает последствие.
+            </div>
+        </li>
+    </ul>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Безопасность и среда</div><div class="divider-line"></div></div>
+
+    <ul class="checklist">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Установлен «магический круг»</span>
+                Студенты понимают: в игре действуют другие правила, это не реальная оценка.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Есть безопасный «стоп»</span>
+                Студент может выйти из роли без последствий, если это некомфортно.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Нет оценки за ход игры</span>
+                За саму игру никто не получает зачёт/незачёт, баллы. Оцениваем только рефлексию.
+            </div>
+        </li>
+    </ul>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Дебрифинг</div><div class="divider-line"></div></div>
+
+    <ul class="checklist">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Заложено время на дебрифинг</span>
+                Минимум 20% от общего времени игровой сессии.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Готовы вопросы для дебрифинга</span>
+                «Что случилось?» → «Почему вы так решили?» → «Как это работает в реальности?»
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-fire">✓</div>
+            <div class="check-text">
+                <span class="check-label">Связка с учебной целью</span>
+                В дебрифинге я явно проговорю, какой навык сейчас был задействован и зачем.
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ИГРОФИКАЦИЯ — РАБОЧАЯ ТЕТРАДЬ
+     ═══════════════════════════════════════════ -->
+<div id="ig-wb" class="section">
+    <div class="section-badge badge-fire">🔥 Игрофикация</div>
+    <div class="section-title gradient-fire">Рабочая тетрадь: проектируем игру</div>
+    <div class="section-subtitle">Заполните каждый блок — и у вас будет готовый скелет образовательной игры для курса.</div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — База</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Название курса / дисциплины</div>
+        <input class="wb-field wb-field-fire" type="text" placeholder="Например: Управление IT-проектами">
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Тема или модуль, который хочу «проиграть»</div>
+        <input class="wb-field wb-field-fire" type="text" placeholder="Например: Работа с рисками на этапе спринта">
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Учебная цель — что студент поймёт / научится делать через игру?</div>
+        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Студент научится распознавать конфликт интересов между ролями в команде и принимать управленческое решение в условиях неполной информации."></textarea>
+        <div class="wb-tip">Подсказка: сформулируйте через действие — «студент сможет...», «студент научится...»</div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Конфликт и ситуация</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Опишите ситуацию / сеттинг игры (1–3 предложения для всех игроков)</div>
+        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Команда разработки готовится к релизу. До дедлайна 2 часа. Заказчик ждёт продукт. Но каждый участник знает что-то, чего не знают остальные..."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">В чём главный конфликт? (Чьи интересы сталкиваются?)</div>
+        <textarea class="wb-field wb-field-fire" rows="2" placeholder="Например: Заказчик хочет продукт сегодня. Разработчик знает о баге. PM должен принять решение, не зная ни того ни другого."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Что в дефиците? (Время / деньги / информация / ресурсы)</div>
+        <input class="wb-field wb-field-fire" type="text" placeholder="Например: 20 минут реального времени + 3 жетона на «дополнительный вопрос»">
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Роли</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-fire">
+        <span class="note-label note-label-fire">Принцип.</span>
+        Каждая роль — закрытая карточка. Студент знает свою роль, но не знает закрытых вводных остальных.
+    </div>
+
+    <div class="wb-matrix">
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-fire">Роль 1</div>
+            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
+            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-fire">Роль 2</div>
+            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
+            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-fire">Роль 3</div>
+            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
+            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-fire">Роль 4 (если нужна)</div>
+            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
+            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Механика и последствия</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Формат игры</div>
+        <select class="wb-field wb-field-fire" style="cursor:pointer">
+            <option value="">— выберите формат —</option>
+            <option>Ролевая симуляция (диалог + решение)</option>
+            <option>Кейс-игра с раундами</option>
+            <option>Настольная игра с картами/жетонами</option>
+            <option>Пресс-конференция / переговоры</option>
+            <option>Суд / дебаты</option>
+            <option>Другой формат</option>
+        </select>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Как игра реагирует на решения? (система последствий)</div>
+        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Если PM соглашается с дедлайном без проверки — мастер объявляет: «Релиз вышел с багом. Клиент подаёт претензию. Минус 2 жетона.» Последствие исходит от системы, не от преподавателя."></textarea>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 5 — Дебрифинг</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Сколько времени на дебрифинг?</div>
+        <input class="wb-field wb-field-fire" type="text" placeholder="Рекомендуется: не менее 20% от общего времени сессии">
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">3 ключевых вопроса для обсуждения после игры</div>
+        <textarea class="wb-field wb-field-fire" rows="4" placeholder="1. Что произошло? (фактический разбор)
+2. Почему вы так решили? (механика решений)
+3. Как это работает в реальной профессиональной ситуации?"></textarea>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ГЕЙМИФИКАЦИЯ — ГАЙД
+     ═══════════════════════════════════════════ -->
+<div id="gm-guide" class="section">
+    <div class="section-badge badge-cool">🌊 Геймификация</div>
+    <div class="section-title gradient-cool">Гайд: Геймификация курса</div>
+    <div class="section-subtitle">Реструктурируем курс, чтобы он давил на те же нейробиологические кнопки, что и гача-игры. Без бейджиков. На игровой логике.</div>
+
+    <div class="note-box note-cool">
+        <span class="note-label note-label-cool">Ключевой тезис.</span>
+        Почему студент гриндит дейлики в Genshin Impact, а домашку не делает? Потому что гача-игра использует 8 глубоких поведенческих драйверов. Геймификация — это <em>не превращение курса в игру</em>, а реструктурирование его UX так, чтобы задействовать те же механизмы мотивации. Мы не рисуем бейджики — мы перепроектируем логику взаимодействия студента с курсом.
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Плохая vs хорошая геймификация</div><div class="divider-line"></div></div>
+
+    <div class="wb-matrix">
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title" style="color:#ef4444;">❌ Бейджификация (PBL)</div>
+            <div class="card-body">Баллы, значки, таблица лидеров поверх скучного курса. Работает 2 недели — потом студенты игнорируют. Потому что <strong>не меняет структуру взаимодействия</strong>, только вешает декор. Это не геймификация.</div>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-cool">✅ Игровая логика (Октализ)</div>
+            <div class="card-body">Перестраиваем сам <strong>маршрут студента</strong> через курс: как он получает информацию, какие цели перед ним стоят, что он чувствует в процессе. Это UX-дизайн на поведенческой основе.</div>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">8 драйверов Октализа (Ю-кай Чоу)</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-cool">
+        <span class="note-label note-label-cool">Принцип.</span>
+        Не нужно использовать все 8 драйверов сразу. Выберите 2–3, которые лучше всего совпадают с проблемой вашего курса, и спроектируйте под них конкретный механизм.
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn open" onclick="toggleAccordion(this)">
+            🌟 Драйвер 1 — Эпичный смысл и призвание
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body open">
+            <p class="card-body"><strong>Суть:</strong> Студент верит, что делает нечто важное — не просто учится, а участвует в чём-то большом.<br><br>
+            <strong>В курсе:</strong> Дайте студентам «миссию» вместо темы. Не «мы изучаем безопасность данных», а «вы — отдел по защите данных компании, на которую идёт атака». Нарратив курса делает студента участником истории, а не зрителем.<br><br>
+            <strong>Пример механики:</strong> Вводное письмо от «клиента» в начале семестра, которое объясняет, зачем именно им нужны эти знания прямо сейчас.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            📈 Драйвер 2 — Развитие и достижения
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Видимый прогресс через реальные, сложные вызовы — не формальные задания.<br><br>
+            <strong>В курсе:</strong> Прогресс должен быть <em>ощутимым</em> и <em>честным</em>. Не «сдал работу — получил 5», а «ты перешёл с уровня «Джун» на «Мид», потому что решил три кейса повышенной сложности». Важна видимая лестница роста.<br><br>
+            <strong>Пример механики:</strong> Карта компетенций, на которой студент видит, что уже умеет, а что нет. Разблокировка следующего уровня — через конкретные доказательства, а не через сдачу теста.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            🎨 Драйвер 3 — Творческий потенциал и обратная связь
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Студент сам выбирает, <em>как</em> решить задачу. Система мгновенно отвечает на его действия.<br><br>
+            <strong>В курсе:</strong> Дайте пространство для личных решений: не один правильный ответ, а вариативные задания. Обратная связь должна быть <em>немедленной</em> и <em>конкретной</em> — не «хорошо», а «вот где ты сорвался и почему».<br><br>
+            <strong>Пример механики:</strong> Задание с открытым финалом: «Предложите три разных решения для одного кейса. Обоснуйте каждое.» Преподаватель даёт фидбек по шагам, а не итоговую оценку.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            🏠 Драйвер 4 — Собственность и накопление
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Чем больше вложил — тем сложнее бросить. Это психология невозвратных затрат, но в <em>благом</em> смысле.<br><br>
+            <strong>В курсе:</strong> Студент накапливает что-то, что принадлежит только ему: портфолио, «базу знаний», личный профиль компетенций. Чем больше он вложил усилий — тем сильнее держит эта ценность.<br><br>
+            <strong>Пример механики:</strong> Портфолио, которое растёт в течение семестра. Каждое задание добавляет артефакт, который потом можно показать работодателю.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            👥 Драйвер 5 — Социальное влияние и причастность
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Люди делают то, что делают другие. Зависть, менторство, командная ответственность — мощнейшие мотиваторы.<br><br>
+            <strong>В курсе:</strong> Создайте систему взаимозависимости. Когда сосед не сдал — страдает вся команда. Или наоборот: «гильдия» сдаёт общий проект и выигрывает вместе.<br><br>
+            <strong>Пример механики:</strong> «Гильдии» или постоянные команды на семестр. Общий командный рейтинг, который зависит от всех. Роль ментора внутри команды (у опытного студента дополнительные очки — за обучение других).</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            ⏳ Драйвер 6 — Дефицит и нетерпение
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Ограниченный доступ создаёт ценность. Человек хочет то, чего у него мало или что скоро закроется.<br><br>
+            <strong>В курсе:</strong> Лимитируйте доступ к чему-то ценному. Пять мест на «консультацию с преподавателем». Только три попытки для сдачи с оценкой «отлично». Задание-бонус, которое открывается только на 48 часов.<br><br>
+            <strong>Пример механики:</strong> ТЗ не лежит сразу в Moodle. Чтобы его получить, команда должна «выкупить» брифинг — задать правильные вопросы в течение одного занятия.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            🎲 Драйвер 7 — Тайна и непредсказуемость
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Случайность, сюрпризы и неизвестность удерживают внимание. Мозг не может оторваться от незавершённого паттерна.<br><br>
+            <strong>В курсе:</strong> Вносите непредсказуемые события. «Заказчик изменил требования» в середине проекта. Случайное распределение усложнённых кейсов. Бонусные очки за нестандартное решение — никто не знает заранее, будут ли они.<br><br>
+            <strong>Пример механики:</strong> «Карта событий» — раз в неделю преподаватель вытягивает карту (внешнее изменение среды), которое влияет на все текущие проекты группы.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+            🛡 Драйвер 8 — Потери и избегание
+            <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+            <p class="card-body"><strong>Суть:</strong> Страх потерять то, что уже есть, мотивирует сильнее, чем надежда на получение нового. Duolingo строится именно на этом — «стрик».<br><br>
+            <strong>В курсе:</strong> Осторожно — этот драйвер токсичен при злоупотреблении. Но в малых дозах работает: накопленные бонусы, которые можно потерять при пропуске. «Страховка» для команды, которую можно потратить один раз.<br><br>
+            <strong>Пример механики:</strong> Командный «жизненный запас» из 3 единиц. Каждый пропуск без предупреждения — минус одна. Потерял все — команда не допускается к финальному бонусному заданию.</p>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ошибка 1.</span>
+        Брать все 8 драйверов сразу. Система перегружается и превращается в хаос. Выберите 2–3 под конкретную проблему курса.
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ошибка 2.</span>
+        Геймификация без цели. «Давайте добавим очки» — не стратегия. Сначала: какое <em>поведение</em> студентов нужно изменить?
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ошибка 3.</span>
+        Игнорировать петлю обратной связи. Действие студента должно получать <em>немедленный</em> отклик. Если обратная связь через неделю — магия исчезает.
+    </div>
+    <div class="note-box note-purple">
+        <span class="note-label note-label-purple">⚠ Ошибка 4.</span>
+        Применять драйвер 8 (потери) без компенсации. Чистые штрафы без возможности восстановиться → демотивация и цинизм.
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ГЕЙМИФИКАЦИЯ — ЧЕК-ЛИСТ
+     ═══════════════════════════════════════════ -->
+<div id="gm-check" class="section">
+    <div class="section-badge badge-cool">🌊 Геймификация</div>
+    <div class="section-title gradient-cool">Чек-лист: готова ли геймификация?</div>
+    <div class="section-subtitle">Проверьте систему перед запуском. Кликайте — чтобы отмечать пункты.</div>
+
+    <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Фундамент</div><div class="divider-line"></div></div>
+
+    <ul class="checklist">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Определено целевое поведение</span>
+                Я знаю, что именно студент должен делать добровольно и чаще: сдавать вовремя, помогать другим, читать доп. материалы...
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Выбрано 2–3 драйвера из Октализа</span>
+                Не все восемь — а именно те, которые решают проблему этого конкретного курса и аудитории.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Это не PBL (бейджификация)</span>
+                Я не просто добавляю очки и значки. Я меняю структуру взаимодействия студента с курсом.
+            </div>
+        </li>
+    </ul>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Механика</div><div class="divider-line"></div></div>
+
+    <ul class="checklist">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Есть петля обратной связи (Core Loop)</span>
+                Действие → немедленный отклик системы → следующий шаг. Студент понимает, что произошло и что делать дальше.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Обратная связь быстрая</span>
+                Студент получает отклик в течение одного занятия, максимум 24 часа. Не через неделю.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Прогресс виден студенту</span>
+                Студент в любой момент понимает, на каком он уровне и что нужно сделать, чтобы двигаться вперёд.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Нет скрытых штрафов</span>
+                Если есть потери (драйвер 8) — студент знает правила заранее и есть способ восстановиться.
+            </div>
+        </li>
+    </ul>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Совместимость с курсом</div><div class="divider-line"></div></div>
+
+    <ul class="checklist">
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Базовая методика не сломана</span>
+                Лекции, задания, экзамен остаются. Геймификация — это UX-слой поверх курса, а не замена содержанию.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Система справедлива</span>
+                Все студенты имеют одинаковый доступ к механикам. Нет скрытых преимуществ для отдельных.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Я могу поддерживать систему весь семестр</span>
+                Геймификация требует постоянного управления. Убедитесь, что у вас есть ресурс на это.
+            </div>
+        </li>
+        <li onclick="toggleCheck(this)">
+            <div class="check-box check-box-cool">✓</div>
+            <div class="check-text">
+                <span class="check-label">Есть план на «пиковые» игровые сессии</span>
+                1–2 раза в семестр запланированы игрофицированные модули — чтобы геймификация дала пиковый опыт.
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ГЕЙМИФИКАЦИЯ — РАБОЧАЯ ТЕТРАДЬ
+     ═══════════════════════════════════════════ -->
+<div id="gm-wb" class="section">
+    <div class="section-badge badge-cool">🌊 Геймификация</div>
+    <div class="section-title gradient-cool">Рабочая тетрадь: проектируем геймификацию</div>
+    <div class="section-subtitle">Заполните каждый блок — и у вас будет готовый план геймификации для вашего курса на основе Октализа.</div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — Диагностика</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Курс / дисциплина</div>
+        <input class="wb-field wb-field-cool" type="text" placeholder="Название курса">
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Главная проблема курса сейчас (что не работает?)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: Студенты не читают теорию до занятий. Или: Половина группы не сдаёт вовремя. Или: Нет командной работы."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Целевое поведение — что студент должен делать чаще / добровольнее?</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: Студент читает теорию до пары и приходит с вопросами. Студент помогает однокурснику без просьбы преподавателя."></textarea>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Выбор драйверов Октализа</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-cool">
+        <span class="note-label note-label-cool">Инструкция.</span>
+        Ниже — все 8 драйверов. Отметьте те, которые лучше всего подходят под вашу проблему, и запишите конкретный механизм для каждого выбранного.
+    </div>
+
+    <div class="wb-block">
+        <div class="wb-label">🌟 Драйвер 1 — Эпичный смысл (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Какую «миссию» или нарратив я дам студентам? Как сделать, чтобы они чувствовали себя участниками чего-то большого?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">📈 Драйвер 2 — Достижения (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как будет выглядеть видимый прогресс? Уровни? Карта компетенций? Как студент видит своё развитие?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">🎨 Драйвер 3 — Творчество и обратная связь (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как я дам пространство для личных решений? Как ускорю и улучшу обратную связь?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">🏠 Драйвер 4 — Собственность (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент накапливает как своё? Портфолио? Личная база знаний? Что он не захочет потерять?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">👥 Драйвер 5 — Социальное влияние (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как создать взаимозависимость? Команды? Роль ментора? Общий командный результат?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">⏳ Драйвер 6 — Дефицит (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что я сделаю ограниченным? Время? Попытки? Доступ к консультации? Бонусное задание на 48 часов?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">🎲 Драйвер 7 — Тайна и непредсказуемость (если выбрали)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Какие события я могу сделать неожиданными? Случайные карты? Изменение условий в середине?"></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">🛡 Драйвер 8 — Потери и избегание (если выбрали — с осторожностью)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент может потерять? Как убедиться, что это не демотивирует, а наоборот — включает? Есть ли способ восстановиться?"></textarea>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Петля обратной связи (Core Loop)</div><div class="divider-line"></div></div>
+
+    <div class="note-box note-cool">
+        <span class="note-label note-label-cool">Принцип.</span>
+        Core Loop — это цикл, который студент проходит снова и снова. Действие → Отклик → Мотивация → Следующее действие. Петля должна быть короткой (в идеале — в пределах одного занятия).
+    </div>
+
+    <div class="wb-matrix">
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-cool">1. Действие студента</div>
+            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что делает студент?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-green">2. Отклик системы</div>
+            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что происходит сразу после?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-purple">3. Вознаграждение / прогресс</div>
+            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент получает или открывает?"></textarea>
+        </div>
+        <div class="wb-matrix-cell">
+            <div class="wb-matrix-title title-cool">4. Мотивация к следующему</div>
+            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Почему он захочет повторить это снова?"></textarea>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Интеграция с курсом</div><div class="divider-line"></div></div>
+
+    <div class="wb-block">
+        <div class="wb-label">Что в курсе я НЕ меняю? (основа остаётся)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Лекции, основные задания, критерии оценки..."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Что именно я меняю / добавляю? (UX-слой геймификации)</div>
+        <textarea class="wb-field wb-field-cool" rows="3" placeholder="Например: Добавляю командные роли, общий рейтинг, еженедельные «карты событий», ограниченный доступ к консультации."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Пиковые точки — когда в семестре будут игровые сессии (игрофикация)?</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: 3-я неделя — ролевой кейс, 8-я неделя — краш-тест проекта, 14-я неделя — финальная симуляция."></textarea>
+    </div>
+    <div class="wb-block">
+        <div class="wb-label">Как я буду поддерживать систему в течение семестра? (честный план)</div>
+        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Сколько времени в неделю? Кто помогает? Как обновляется контент?"></textarea>
+    </div>
+</div>
+
+<script>
+function switchTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = ['ig-guide','ig-check','ig-wb','gm-guide','gm-check','gm-wb'].indexOf(id);
+    document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+}
+
+function toggleCheck(li) {
+    li.classList.toggle('checked');
+}
+
+// Open first accordion in each section by default
+document.querySelectorAll('.accordion-btn.open').forEach(btn => {
+    btn.nextElementSibling.classList.add('open');
+});
+</script>
+</body>
+</html>
