@@ -1,1317 +1,1758 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игрофикация и Геймификация — Мастер-класс</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Игрофикация и Геймификация — Библиотека дизайна обучения</title>
+    <meta
+      name="description"
+      content="Интерактивный воркбук по игрофикации и геймификации: принципы, рабочие тетради, чек-листы и методы проектирования образовательных сценариев."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --bg: #0f172a;
-            --bg-deep: #070e1c;
-            --surface: #1e293b;
-            --text: #f1f5f9;
-            --text-sec: #94a3b8;
-            --text-muted: #64748b;
-            --accent-fire: #f97316;
-            --accent-glow: #fb923c;
-            --accent-cool: #38bdf8;
-            --accent-purple: #a78bfa;
-            --accent-green: #4ade80;
-            --border: rgba(255,255,255,0.07);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
+      :root {
+        --brand-fire-50: #fff4eb;
+        --brand-fire-100: #ffe7d1;
+        --brand-fire-200: #ffc99a;
+        --brand-fire-300: #ffab63;
+        --brand-fire-400: #ff8b3d;
+        --brand-fire-500: #f97316;
+        --brand-fire-600: #ea580c;
+        --brand-fire-700: #c2410c;
+
+        --brand-cool-50: #edf9ff;
+        --brand-cool-100: #dff4ff;
+        --brand-cool-200: #bfe9ff;
+        --brand-cool-300: #90d8ff;
+        --brand-cool-400: #5dc2ff;
+        --brand-cool-500: #38bdf8;
+        --brand-cool-600: #0ea5e9;
+        --brand-cool-700: #0369a1;
+
+        --brand-violet-50: #f4f0ff;
+        --brand-violet-100: #e7ddff;
+        --brand-violet-200: #d2c0ff;
+        --brand-violet-300: #b89cff;
+        --brand-violet-400: #9d7bff;
+        --brand-violet-500: #8b5cf6;
+        --brand-violet-600: #7c3aed;
+        --brand-violet-700: #5b2fc8;
+
+        --brand-green-50: #edfff5;
+        --brand-green-100: #d7fbe7;
+        --brand-green-200: #aef0ca;
+        --brand-green-300: #7ae3a5;
+        --brand-green-400: #4bd981;
+        --brand-green-500: #22c55e;
+        --brand-green-600: #16a34a;
+
+        --bg-900: #07131f;
+        --bg-850: #0b1826;
+        --bg-800: #0f1d2d;
+        --bg-700: #14273a;
+        --bg-600: #1a2f40;
+        --bg-500: #223b4f;
+        --bg-400: #2d4a5f;
+
+        --surface-900: #0d1a2b;
+        --surface-800: #132332;
+        --surface-700: #1a2d3e;
+        --surface-600: #243a4e;
+        --surface-500: #2b465c;
+
+        --glass: rgba(15, 23, 42, 0.66);
+        --glass-strong: rgba(15, 23, 42, 0.82);
+
+        --text-100: #f8fbff;
+        --text-200: #e5edf7;
+        --text-300: #d0dbe9;
+        --text-400: #a8bdd5;
+        --text-500: #7f96ad;
+        --text-600: #607389;
+        --text-700: #42556d;
+
+        --border-soft: rgba(255, 255, 255, 0.08);
+        --border-medium: rgba(255, 255, 255, 0.12);
+        --border-strong: rgba(255, 255, 255, 0.18);
+
+        --success: #34d399;
+        --warning: #fbbf24;
+        --danger: #f87171;
+        --info: #60a5fa;
+
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-heading: "Sora", "Segoe UI", sans-serif;
+        --font-body: "Inter", "Segoe UI", sans-serif;
+        --font-mono: "JetBrains Mono", "SFMono-Regular", monospace;
+
+        --text-xs: 0.72rem;
+        --text-sm: 0.82rem;
+        --text-md: 0.95rem;
+        --text-lg: 1.05rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.6rem;
+        --text-3xl: 2.2rem;
+        --text-4xl: clamp(2.6rem, 4vw, 3.8rem);
+
+        --leading-tight: 1.08;
+        --leading-normal: 1.55;
+        --leading-relaxed: 1.7;
+
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-7: 1.75rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-14: 3.5rem;
+        --space-16: 4rem;
+        --space-20: 5rem;
+        --space-24: 6rem;
+
+        --radius-xs: 0.45rem;
+        --radius-sm: 0.75rem;
+        --radius-md: 1rem;
+        --radius-lg: 1.5rem;
+        --radius-xl: 2rem;
+
+        --shadow-sm: 0 8px 20px rgba(4, 10, 17, 0.18);
+        --shadow-md: 0 14px 28px rgba(4, 10, 17, 0.24);
+        --shadow-lg: 0 24px 48px rgba(4, 10, 17, 0.32);
+        --shadow-xl: 0 34px 74px rgba(4, 10, 17, 0.42);
+
+        --glow-fire: 0 0 32px rgba(249, 115, 22, 0.35);
+        --glow-cool: 0 0 32px rgba(56, 189, 248, 0.35);
+        --glow-violet: 0 0 32px rgba(139, 92, 246, 0.35);
+
+        --transition-fast: 140ms ease;
+        --transition-base: 220ms ease;
+        --transition-slow: 420ms ease;
+        --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+
+        --container: 900px;
+        --content-width: min(100% - 2rem, 900px);
+        --header-height: 72px;
+
+        --gradient-fire: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fbbf24 100%);
+        --gradient-cool: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #a78bfa 100%);
+        --gradient-violet: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+        --gradient-green: linear-gradient(135deg, #4ade80 0%, #10b981 100%);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background:
+          radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.18), transparent 22%),
+          radial-gradient(circle at 88% 12%, rgba(249, 115, 22, 0.14), transparent 24%),
+          linear-gradient(180deg, #07131f 0%, #0c1827 28%, #0f1d2d 100%);
+        color: var(--text-100);
+        line-height: var(--leading-normal);
+        letter-spacing: -0.01em;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img, svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-heading);
+        letter-spacing: -0.04em;
+        line-height: var(--leading-tight);
+        margin: 0;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: var(--text-4xl);
+        font-weight: 800;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 3vw, 3rem);
+      }
+
+      h3 {
+        font-size: clamp(1.45rem, 2vw, 2.15rem);
+      }
+
+      p, li, label, input, textarea, button, .card-body {
+        font-family: var(--font-body);
+        font-size: var(--text-md);
+        line-height: var(--leading-relaxed);
+      }
+
+      small, .microcopy {
+        font-size: var(--text-xs);
+        color: var(--text-500);
+      }
+
+      code, pre {
+        font-family: var(--font-mono);
+      }
+
+      .page-shell {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding-bottom: 5rem;
+      }
+
+      .utility-bar {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 1rem 1rem 0;
+      }
+
+      .utility-card {
+        position: relative;
+        border-radius: 1.3rem;
+        border: 1px solid var(--border-soft);
+        background: rgba(16, 23, 33, 0.68);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+      }
+
+      .utility-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 30%, transparent 65%, rgba(255,255,255,0.02));
+        pointer-events: none;
+      }
+
+      .utility-header {
+        position: relative;
+        padding: 1rem 1.15rem 0.25rem;
+      }
+
+      .accordion-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: none;
+        background: transparent;
+        color: var(--text-200);
+        cursor: pointer;
+        padding: 0.25rem 0.25rem 0.7rem;
+        border-radius: 0.75rem;
+        transition: var(--transition-base);
+      }
+
+      .accordion-btn:hover {
+        background: rgba(255,255,255,0.02);
+      }
+
+      .accordion-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-family: var(--font-heading);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-400);
+      }
+
+      .accordion-arrow {
+        transition: transform var(--transition-base);
+        color: var(--text-500);
+        font-size: 0.82rem;
+      }
+
+      .accordion-btn.open .accordion-arrow {
+        transform: rotate(180deg);
+      }
+
+      .utility-body {
+        display: none;
+        position: relative;
+        padding: 0.5rem 1.1rem 1.1rem;
+      }
+
+      .utility-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.9fr;
+        gap: 1rem;
+      }
+
+      .utility-card-box {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid var(--border-soft);
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+
+      .utility-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 0.9rem;
+      }
+
+      .utility-btn,
+      .btn,
+      .print-btn {
+        appearance: none;
+        border: 1px solid var(--border-medium);
+        background: rgba(255,255,255,0.02);
+        color: var(--text-100);
+        border-radius: 0.85rem;
+        padding: 0.8rem 1rem;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+      }
+
+      .utility-btn:hover,
+      .btn:hover,
+      .print-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+        border-color: rgba(255,255,255,0.2);
+      }
+
+      .utility-btn.fire,
+      .btn.fire,
+      .print-btn {
+        background: linear-gradient(135deg, var(--brand-fire-500), var(--brand-fire-600));
+        border-color: transparent;
+        color: white;
+        box-shadow: var(--glow-fire);
+      }
+
+      .utility-btn.cool,
+      .btn.cool {
+        background: linear-gradient(135deg, var(--brand-cool-500), var(--brand-cool-600));
+        border-color: transparent;
+        color: white;
+        box-shadow: var(--glow-cool);
+      }
+
+      .save-status {
+        margin-top: 0.8rem;
+        color: var(--text-500);
+        font-size: 0.78rem;
+      }
+
+      .micro-guide {
+        margin-top: 0.7rem;
+        border: 1px solid var(--border-soft);
+        background: rgba(255,255,255,0.02);
+        border-radius: 1rem;
+        padding: 0.9rem 1rem;
+      }
+
+      .micro-guide-title {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--text-500);
+        margin-bottom: 0.75rem;
+      }
+
+      .micro-guide p {
+        font-size: 0.82rem;
+        color: var(--text-400);
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+      }
+
+      .hidden-file-input {
+        display: none;
+      }
+
+      .tabs-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+        padding: 0.6rem 1rem 0.9rem;
+        border-bottom: 1px solid var(--border-soft);
+        background: rgba(7, 13, 20, 0.72);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: var(--shadow-sm);
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }
+
+      .tabs-bar::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .tabs-bar::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.15);
+        border-radius: 999px;
+      }
+
+      .tab-btn {
+        flex-shrink: 0;
+        appearance: none;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text-500);
+        padding: 0.82rem 1rem;
+        border-radius: 0.9rem;
+        font-family: var(--font-heading);
+        font-size: 0.73rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: var(--transition-base);
+      }
+
+      .tab-btn:hover {
+        color: var(--text-100);
+        border-color: var(--border-medium);
+        background: rgba(255,255,255,0.02);
+      }
+
+      .tab-btn.active {
+        color: var(--text-100);
+        background: rgba(255,255,255,0.04);
+        border-color: var(--border-medium);
+      }
+
+      .tab-btn.section-games.active {
+        color: var(--brand-fire-300);
+        border-color: rgba(249, 115, 22, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.1);
+      }
+
+      .tab-btn.section-gamif.active {
+        color: var(--brand-cool-300);
+        border-color: rgba(56, 189, 248, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.08);
+      }
+
+      .section {
+        display: none;
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 2.8rem 1rem 4rem;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      .hero {
+        position: relative;
+        padding-top: 1rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.58rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        border: 1px solid var(--border-soft);
+        background: rgba(255,255,255,0.025);
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .badge.fire {
+        background: rgba(249,115,22,0.08);
+        border-color: rgba(249,115,22,0.24);
+        color: var(--brand-fire-300);
+      }
+
+      .badge.cool {
+        background: rgba(56,189,248,0.08);
+        border-color: rgba(56,189,248,0.24);
+        color: var(--brand-cool-300);
+      }
+
+      .hero-title {
+        margin-top: 1rem;
+        font-size: clamp(2.3rem, 4vw, 3.7rem);
+        max-width: 760px;
+        letter-spacing: -0.05em;
+      }
+
+      .gradient-fire {
+        background: var(--gradient-fire);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .gradient-cool {
+        background: var(--gradient-cool);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        max-width: 720px;
+        margin-top: 0.9rem;
+        color: var(--text-400);
+        font-size: 1.03rem;
+      }
+
+      .note-box {
+        margin-top: 1.4rem;
+        padding: 1rem 1.15rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border-soft);
+        background: rgba(255,255,255,0.025);
+      }
+
+      .note-box.fire {
+        background: rgba(249, 115, 22, 0.06);
+        border-color: rgba(249,115,22,0.22);
+      }
+
+      .note-box.cool {
+        background: rgba(56, 189, 248, 0.06);
+        border-color: rgba(56,189,248,0.22);
+      }
+
+      .note-box.violet {
+        background: rgba(139, 92, 246, 0.06);
+        border-color: rgba(139, 92, 246, 0.22);
+      }
+
+      .note-label {
+        display: inline-block;
+        margin-right: 0.35rem;
+        font-weight: 700;
+      }
+
+      .note-label.fire { color: var(--brand-fire-300); }
+      .note-label.cool { color: var(--brand-cool-300); }
+      .note-label.violet { color: var(--brand-violet-300); }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2.2rem 0 1.3rem;
+      }
+
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: rgba(255,255,255,0.08);
+      }
+
+      .divider-label {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-500);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        position: relative;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+          var(--surface-800);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-lg);
+        padding: 1.45rem 1.35rem;
+        box-shadow: var(--shadow-sm);
+        transform-style: preserve-3d;
+        transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 28%, transparent 70%, rgba(255,255,255,0.015));
+        pointer-events: none;
+      }
+
+      .card:hover {
+        transform: translateY(-4px) rotateX(2deg);
+        box-shadow: var(--shadow-md);
+        border-color: rgba(255,255,255,0.14);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .card-icon {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 0.8rem;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border-soft);
+      }
+
+      .icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .icon-fire { color: var(--brand-fire-400); }
+      .icon-cool { color: var(--brand-cool-400); }
+      .icon-violet { color: var(--brand-violet-400); }
+      .icon-green { color: var(--brand-green-400); }
+
+      .card-title {
+        font-family: var(--font-heading);
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+
+      .card-desc {
+        color: var(--text-400);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      .accordion {
+        margin-bottom: 0.85rem;
+      }
+
+      .accordion-btn-trigger {
+        width: 100%;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border-soft);
+        border-radius: 0.95rem;
+        padding: 1rem 1.1rem;
+        color: var(--text-100);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        cursor: pointer;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.98rem;
+        transition: var(--transition-base);
+      }
+
+      .accordion-btn-trigger:hover {
+        background: rgba(255,255,255,0.03);
+      }
+
+      .accordion-btn-trigger.open {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-color: transparent;
+      }
+
+      .accordion-body {
+        display: none;
+        background: rgba(255,255,255,0.015);
+        border: 1px solid var(--border-soft);
+        border-top: none;
+        border-bottom-left-radius: 0.95rem;
+        border-bottom-right-radius: 0.95rem;
+        padding: 1rem 1.1rem 1.1rem;
+        color: var(--text-400);
+        line-height: 1.75;
+      }
+
+      .accordion-body.open {
+        display: block;
+      }
+
+      .steps {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .step {
+        position: relative;
+        display: flex;
+        gap: 1rem;
+        padding: 0.15rem 0 0.2rem;
+      }
+
+      .step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 1.28rem;
+        top: 2.85rem;
+        bottom: -0.85rem;
+        width: 2px;
+        background: rgba(255,255,255,0.08);
+      }
+
+      .step-number {
+        position: relative;
+        z-index: 1;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 0.82rem;
+      }
+
+      .step-number.fire {
+        color: var(--brand-fire-300);
+        background: rgba(249,115,22,0.12);
+        border: 1px solid rgba(249,115,22,0.25);
+      }
+
+      .step-number.cool {
+        color: var(--brand-cool-300);
+        background: rgba(56,189,248,0.12);
+        border: 1px solid rgba(56,189,248,0.25);
+      }
+
+      .step-content {
+        flex: 1;
+        padding: 0.25rem 0 0.5rem;
+      }
+
+      .step-title {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.35rem;
+      }
+
+      .step-body {
+        font-size: 0.9rem;
+        color: var(--text-400);
+        line-height: 1.7;
+      }
+
+      .step-example {
+        margin-top: 0.7rem;
+        padding: 0.75rem 0.85rem;
+        border-radius: 0.8rem;
+        border-left: 3px solid var(--brand-fire-500);
+        background: rgba(255,255,255,0.02);
+        color: var(--text-500);
+        font-size: 0.82rem;
+        line-height: 1.6;
+      }
+
+      .step-example.fire { border-left-color: var(--brand-fire-500); }
+      .step-example.cool { border-left-color: var(--brand-cool-500); }
+
+      .checklist {
+        list-style: none;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .checklist li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        padding: 0.9rem 0.95rem;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border-soft);
+        border-radius: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition-base);
+      }
+
+      .checklist li:hover {
+        background: rgba(255,255,255,0.04);
+      }
+
+      .checklist li.checked {
+        opacity: 0.7;
+      }
+
+      .check-box {
+        width: 1.45rem;
+        height: 1.45rem;
+        display: grid;
+        place-items: center;
+        border-radius: 0.4rem;
+        border: 2px solid var(--text-500);
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-top: 0.15rem;
+      }
+
+      .checklist li.checked .check-box.fire,
+      .checklist li.checked .check-box.cool {
+        color: white;
+        border-color: transparent;
+      }
+
+      .check-box.fire {
+        color: var(--brand-fire-300);
+        border-color: rgba(249,115,22,0.35);
+      }
+
+      .check-box.cool {
+        color: var(--brand-cool-300);
+        border-color: rgba(56,189,248,0.35);
+      }
+
+      .checklist li.checked .check-box.fire {
+        background: var(--brand-fire-500);
+      }
+
+      .checklist li.checked .check-box.cool {
+        background: var(--brand-cool-500);
+      }
+
+      .check-text {
+        flex: 1;
+        color: var(--text-400);
+        line-height: 1.75;
+      }
+
+      .check-label {
+        display: block;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+        color: var(--text-100);
+      }
+
+      .checklist li.checked .check-text {
+        text-decoration: line-through;
+      }
+
+      .workbook {
+        display: grid;
+        gap: 1.1rem;
+      }
+
+      .field-block {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .field-label {
+        font-family: var(--font-heading);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+        color: var(--text-500);
+      }
+
+      .wb-field {
+        width: 100%;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border-soft);
+        border-radius: 0.85rem;
+        padding: 0.9rem 1rem;
+        color: var(--text-100);
+        font: 500 0.95rem/1.6 var(--font-body);
+        transition: var(--transition-base);
+      }
+
+      .wb-field:focus {
+        outline: none;
+        border-color: rgba(255,255,255,0.14);
+        box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .wb-field::placeholder {
+        color: var(--text-600);
+      }
+
+      .wb-field.fire:focus {
+        border-color: rgba(249,115,22,0.4);
+      }
+
+      .wb-field.cool:focus {
+        border-color: rgba(56,189,248,0.4);
+      }
+
+      textarea.wb-field {
+        min-height: 7rem;
+        resize: vertical;
+      }
+
+      .wb-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .matrix-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .matrix-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border-soft);
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+
+      .matrix-title {
+        font-family: var(--font-heading);
+        font-size: 0.76rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+      }
+
+      .matrix-title.fire { color: var(--brand-fire-300); }
+      .matrix-title.cool { color: var(--brand-cool-300); }
+      .matrix-title.violet { color: var(--brand-violet-300); }
+      .matrix-title.green { color: var(--brand-green-300); }
+
+      .mono {
+        font-family: var(--font-mono);
+      }
+
+      @media (max-width: 760px) {
+        .utility-grid,
+        .card-grid,
+        .wb-grid,
+        .matrix-grid {
+          grid-template-columns: 1fr;
         }
 
-        /* === TABS === */
-        .tabs-bar {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(7,14,28,0.92);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            display: flex; overflow-x: auto;
-            padding: 0 24px;
-            gap: 4px;
+        .section {
+          padding-top: 2.2rem;
         }
-        .tabs-bar::-webkit-scrollbar { height: 3px; }
-        .tabs-bar::-webkit-scrollbar-thumb { background: var(--accent-fire); }
-        .tab-btn {
-            flex-shrink: 0;
-            padding: 14px 20px;
-            font-size: 0.82rem; font-weight: 600;
-            letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--text-muted);
-            background: none; border: none; cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.25s;
-            white-space: nowrap;
-        }
-        .tab-btn:hover { color: var(--text); }
-        .tab-btn.active {
-            color: var(--accent-fire);
-            border-bottom-color: var(--accent-fire);
-        }
-        .tab-btn.section-games.active { color: #f97316; border-bottom-color: #f97316; }
-        .tab-btn.section-gamif.active { color: #38bdf8; border-bottom-color: #38bdf8; }
+      }
 
-        /* === SECTIONS === */
-        .section { display: none; max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
-        .section.active { display: block; }
-
-        /* === SECTION HEADER === */
-        .section-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 6px 16px; border-radius: 99px;
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        .badge-fire { background: rgba(249,115,22,0.12); color: var(--accent-fire); border: 1px solid rgba(249,115,22,0.25); }
-        .badge-cool { background: rgba(56,189,248,0.12); color: var(--accent-cool); border: 1px solid rgba(56,189,248,0.25); }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 900; line-height: 1.15;
-            margin-bottom: 12px;
-        }
-        .gradient-fire { background: linear-gradient(135deg, #f97316, #fb923c, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gradient-cool { background: linear-gradient(135deg, #38bdf8, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .section-subtitle {
-            font-size: 1.05rem; color: var(--text-sec); line-height: 1.7;
-            margin-bottom: 40px; max-width: 700px;
+      @media print {
+        .tabs-bar, .utility-bar, .print-btn {
+          display: none !important;
         }
 
-        /* === DIVIDERS === */
-        .divider {
-            display: flex; align-items: center; gap: 16px;
-            margin: 44px 0 32px;
+        .section {
+          display: block !important;
+          page-break-after: always;
         }
-        .divider-line { flex: 1; height: 1px; background: var(--border); }
-        .divider-label {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--text-muted); white-space: nowrap;
-        }
-
-        /* === CARDS === */
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px; padding: 28px 32px;
-            margin-bottom: 16px;
-        }
-        .card-head {
-            display: flex; align-items: flex-start; gap: 16px;
-            margin-bottom: 16px;
-        }
-        .card-icon {
-            font-size: 1.6rem; line-height: 1;
-            flex-shrink: 0; margin-top: 2px;
-        }
-        .card-title {
-            font-size: 1.05rem; font-weight: 700;
-            margin-bottom: 4px; line-height: 1.3;
-        }
-        .card-desc {
-            font-size: 0.9rem; color: var(--text-sec); line-height: 1.65;
-        }
-        .card-body {
-            font-size: 0.9rem; color: var(--text-sec); line-height: 1.7;
-        }
-
-        /* === ACCORDION === */
-        .accordion { margin-bottom: 12px; }
-        .accordion-btn {
-            width: 100%; text-align: left;
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 18px 24px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem; font-weight: 600; color: var(--text);
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.2s;
-        }
-        .accordion-btn:hover { background: rgba(255,255,255,0.04); }
-        .accordion-btn.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
-        .accordion-arrow { font-size: 0.85rem; color: var(--text-muted); transition: transform 0.25s; }
-        .accordion-btn.open .accordion-arrow { transform: rotate(180deg); }
-        .accordion-body {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-top: none;
-            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
-            padding: 20px 24px; display: none;
-        }
-        .accordion-body.open { display: block; }
-
-        /* === STEPS === */
-        .steps { display: flex; flex-direction: column; gap: 0; }
-        .step {
-            display: flex; gap: 20px; position: relative;
-        }
-        .step:not(:last-child)::after {
-            content: '';
-            position: absolute; left: 19px; top: 48px;
-            width: 2px; bottom: 0;
-            background: var(--border);
-        }
-        .step-num {
-            flex-shrink: 0; width: 40px; height: 40px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.85rem; font-weight: 700;
-            position: relative; z-index: 1;
-            margin-top: 4px;
-        }
-        .step-num-fire { background: rgba(249,115,22,0.15); color: var(--accent-fire); border: 1px solid rgba(249,115,22,0.3); }
-        .step-num-cool { background: rgba(56,189,248,0.15); color: var(--accent-cool); border: 1px solid rgba(56,189,248,0.3); }
-        .step-content { padding: 6px 0 28px; flex: 1; }
-        .step-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 6px; }
-        .step-body { font-size: 0.875rem; color: var(--text-sec); line-height: 1.65; }
-        .step-example {
-            margin-top: 10px; padding: 10px 14px;
-            background: rgba(255,255,255,0.03); border-left: 3px solid;
-            border-radius: 4px; font-size: 0.82rem; color: var(--text-muted);
-            line-height: 1.6;
-        }
-        .step-example-fire { border-color: var(--accent-fire); }
-        .step-example-cool { border-color: var(--accent-cool); }
-
-        /* === CHECKLIST === */
-        .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .checklist li {
-            display: flex; align-items: flex-start; gap: 14px;
-            padding: 14px 18px;
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .checklist li:hover { background: rgba(255,255,255,0.04); }
-        .checklist li.checked { opacity: 0.55; }
-        .check-box {
-            width: 22px; height: 22px; flex-shrink: 0;
-            border-radius: 6px; border: 2px solid var(--text-muted);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.75rem; transition: all 0.2s; margin-top: 1px;
-        }
-        .checklist li.checked .check-box-fire { background: var(--accent-fire); border-color: var(--accent-fire); color: #fff; }
-        .checklist li.checked .check-box-cool { background: var(--accent-cool); border-color: var(--accent-cool); color: #fff; }
-        .check-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-sec); flex: 1; }
-        .check-label { font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; font-size: 0.9rem; }
-        .checklist li.checked .check-text { text-decoration: line-through; }
-
-        /* === WORKBOOK === */
-        .wb-block { margin-bottom: 28px; }
-        .wb-label {
-            font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--text-muted); margin-bottom: 8px;
-        }
-        .wb-field {
-            width: 100%; background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border); border-radius: 10px;
-            padding: 14px 18px; color: var(--text);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.88rem; line-height: 1.6; resize: vertical;
-            transition: border-color 0.2s;
-        }
-        .wb-field:focus { outline: none; }
-        .wb-field-fire:focus { border-color: rgba(249,115,22,0.5); }
-        .wb-field-cool:focus { border-color: rgba(56,189,248,0.5); }
-        .wb-field::placeholder { color: var(--text-muted); }
-        .wb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .wb-tip {
-            font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;
-            line-height: 1.5; font-style: italic;
-        }
-        .wb-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .wb-matrix-cell {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-            border-radius: 10px; padding: 14px 16px;
-        }
-        .wb-matrix-title {
-            font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 0.06em; margin-bottom: 8px;
-        }
-        .title-fire { color: var(--accent-fire); }
-        .title-cool { color: var(--accent-cool); }
-        .title-green { color: var(--accent-green); }
-        .title-purple { color: var(--accent-purple); }
-
-        /* === DANGER/NOTE BOXES === */
-        .note-box {
-            padding: 16px 20px; border-radius: 12px;
-            font-size: 0.875rem; line-height: 1.7; margin-bottom: 16px;
-        }
-        .note-fire { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); }
-        .note-cool { background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2); }
-        .note-purple { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
-        .note-label { font-weight: 700; margin-right: 6px; }
-        .note-label-fire { color: var(--accent-fire); }
-        .note-label-cool { color: var(--accent-cool); }
-        .note-label-purple { color: var(--accent-purple); }
-
-
-
-        /* === SAVE / EXPORT PANEL === */
-        .utility-bar {
-            max-width: 900px; margin: 22px auto 0; padding: 0 24px;
-        }
-        .utility-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 18px 20px;
-            margin-bottom: 18px;
-        }
-        .utility-title {
-            font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;
-        }
-        .utility-desc {
-            font-size: 0.84rem; color: var(--text-sec); line-height: 1.65;
-        }
-        .utility-actions {
-            display: flex; flex-wrap: wrap; gap: 10px;
-            margin-top: 14px;
-        }
-        .utility-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 14px; border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--surface); color: var(--text);
-            font-size: 0.82rem; font-weight: 600; cursor: pointer;
-            transition: all 0.2s;
-        }
-        .utility-btn:hover { transform: translateY(-1px); }
-        .utility-btn.fire:hover { border-color: rgba(249,115,22,0.35); }
-        .utility-btn.cool:hover { border-color: rgba(56,189,248,0.35); }
-        .utility-grid {
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px;
-        }
-        .micro-guide {
-            margin-top: 12px; padding: 12px 14px;
-            border-radius: 12px; background: rgba(255,255,255,0.025);
-            border: 1px solid var(--border);
-        }
-        .micro-guide-title {
-            font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em;
-            color: var(--text-muted); font-weight: 700; margin-bottom: 8px;
-        }
-        .micro-guide p {
-            font-size: 0.8rem; color: var(--text-sec); line-height: 1.6; margin-bottom: 6px;
-        }
-        .save-status {
-            font-size: 0.78rem; color: var(--text-muted); margin-top: 12px;
-        }
-        .hidden-file-input { display: none; }
-
-        /* === PRINT === */
-        .print-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            margin-bottom: 32px; padding: 10px 20px;
-            border-radius: 99px; border: 1px solid var(--border);
-            background: var(--surface); color: var(--text-sec);
-            font-size: 0.82rem; font-weight: 600; cursor: pointer;
-            transition: all 0.2s;
-        }
-        .print-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
-
-        @media (max-width: 600px) {
-            .wb-grid, .wb-matrix { grid-template-columns: 1fr; }
-            .section { padding: 32px 16px 60px; }
-        }
-        @media print {
-            .tabs-bar, .print-btn { display: none; }
-            .section { display: block !important; page-break-after: always; }
-        }
+      }
     </style>
-</head>
-<body>
-
-
-<div class="utility-bar">
-    <div class="utility-card">
-        <button class="accordion-btn" onclick="toggleUtility(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:0;color:var(--text);font-family:inherit;">
-            <span style="font-size:0.9rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-sec);">💾 Сохранение и перенос работы</span>
-            <span class="accordion-arrow" style="font-size:0.85rem;color:var(--text-muted);transition:transform 0.25s;">▼</span>
-        </button>
-        <div id="utility-body" style="display:none;margin-top:16px;">
-            <div class="utility-grid">
-                <div>
-                    <div class="utility-desc">Воркбук хранит ваши ответы в браузере. Можно скачать прогресс, отправить себе и открыть на другом устройстве.</div>
-                    <div class="utility-actions">
-                        <button class="utility-btn fire" onclick="exportProgress()">💾 Скачать прогресс (.json)</button>
-                        <button class="utility-btn cool" onclick="document.getElementById('import-progress-file').click()">📥 Загрузить прогресс (.json)</button>
-                        <button class="utility-btn fire" onclick="exportFilledHtml()">📝 Экспортировать результат (.html)</button>
-                        <button class="utility-btn cool" onclick="exportPlainText()">📄 Экспортировать результат (.txt)</button>
-                        <button class="utility-btn" onclick="resetWorkbookData()">♻️ Сбросить всё</button>
-                        <button class="print-btn" onclick="window.print()">🖨 Распечатать / PDF</button>
-                    </div>
-                    <div id="save-status" class="save-status">Автосохранение включено.</div>
-                    <input id="import-progress-file" class="hidden-file-input" type="file" accept=".json,application/json" onchange="importProgress(event)">
-                </div>
-                <div>
-                    <div class="micro-guide">
-                        <div class="micro-guide-title">Мини-гайд: перенос на другое устройство</div>
-                        <p>1. Нажмите <strong>«Скачать прогресс (.json)»</strong>.</p>
-                        <p>2. Отправьте файл себе на почту или в мессенджер.</p>
-                        <p>3. На другом устройстве откройте этот же воркбук и нажмите <strong>«Загрузить прогресс (.json)»</strong>.</p>
-                    </div>
-                    <div class="micro-guide">
-                        <div class="micro-guide-title">Мини-гайд: как открыть HTML в Word</div>
-                        <p>1. Нажмите <strong>«Экспортировать результат (.html)»</strong>.</p>
-                        <p>2. Сохраните файл на устройство.</p>
-                        <p>3. Откройте Word → <strong>Файл → Открыть</strong> → выберите этот HTML-файл.</p>
-                        <p>4. При необходимости сразу сохраните его как <strong>.docx</strong>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="tabs-bar">
-    <button class="tab-btn section-games active" onclick="switchTab('ig-guide')">🔥 Гайд: Игрофикация</button>
-    <button class="tab-btn section-games" onclick="switchTab('ig-wb')">📓 Тетрадь: Игрофикация</button>
-    <button class="tab-btn section-games" onclick="switchTab('ig-check')">✅ Чек-лист: Игрофикация</button>
-    <button class="tab-btn section-gamif" onclick="switchTab('gm-guide')">🌊 Гайд: Геймификация</button>
-    <button class="tab-btn section-gamif" onclick="switchTab('gm-wb')">📓 Тетрадь: Геймификация</button>
-    <button class="tab-btn section-gamif" onclick="switchTab('gm-check')">✅ Чек-лист: Геймификация</button>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ИГРОФИКАЦИЯ — ГАЙД
-     ═══════════════════════════════════════════ -->
-<div id="ig-guide" class="section active">
-    <div class="section-badge badge-fire">🔥 Игрофикация</div>
-    <div class="section-title gradient-fire">Гайд: Игрофикация курса</div>
-    <div class="section-subtitle">Превращаем учебный модуль в игру — не ради веселья, а ради настоящего педагогического опыта.</div>
-
-    <div class="note-box note-fire">
-        <span class="note-label note-label-fire">Ключевой тезис.</span>
-        Игра — это эволюционный симулятор реальности. Детёныши животных играют не для развлечения: они отрабатывают поведение, где цена ошибки снижена до нуля, но нейронный опыт — настоящий. Игрофикация берёт эту логику и применяет к учебному материалу: создаёт безопасную песочницу, где студент <em>действует</em> и <em>переживает последствия</em>, а не слушает лекцию.
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Что это такое</div><div class="divider-line"></div></div>
-
-    <div class="card">
-        <div class="card-head">
-            <div class="card-icon">🎭</div>
-            <div>
-                <div class="card-title">Игрофикация ≠ «игра на паре»</div>
-                <div class="card-desc">Игрофикация — это создание полноценного <strong>игрового пространства</strong> (магического круга), внутри которого <em>обучение происходит через механику самой игры</em>. Контент перестаёт быть объектом передачи — он становится средой, в которой игрок принимает решения.</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-head">
-            <div class="card-icon">🎲</div>
-            <div>
-                <div class="card-title">Спектр форматов: от простого к сложному</div>
-            </div>
-        </div>
-        <div class="card-body">
-            <strong style="color: var(--accent-fire);">Уровень 1 — Симуляция ситуации</strong><br>
-            Пресс-конференция по курсу «Основы PR» (половина группы — журналисты, половина — спикеры). Дебаты. Переговоры. Суд присяжных по кейсу.<br><br>
-            <strong style="color: var(--accent-fire);">Уровень 2 — Кейс-игра</strong><br>
-            Студенты получают роли, закрытые вводные и ресурсы. Есть конфликт и цель. Игра разворачивается через принятие решений по раундам.<br><br>
-            <strong style="color: var(--accent-fire);">Уровень 3 — Настольная или ролевая игра</strong><br>
-            Полноценная механика: карты, жетоны, кубики или словесная система. Может быть разработана под конкретный курс. Часто используется для отработки сложных процессов (Scrum, переговоры, антикризис).<br><br>
-            <strong style="color: var(--accent-fire);">Уровень 4 — Иммерсивная / павильонная игра</strong><br>
-            LARP-формат, городские квесты, «живые» ролевые на несколько часов. Максимальное погружение — студент буквально проживает ситуацию.
-        </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Принципы игрофикации</div><div class="divider-line"></div></div>
-
-    <div class="accordion">
-        <button class="accordion-btn open" onclick="toggleAccordion(this)">
-            1. Магический круг: игра — это отдельный мир
+  </head>
+  <body>
+    <div class="utility-bar">
+      <div class="utility-card">
+        <div class="utility-header">
+          <button class="accordion-btn" onclick="toggleUtility(this)">
+            <span class="accordion-label">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4.5h10a2.5 2.5 0 0 1 2.5 2.5v10A2.5 2.5 0 0 1 17 19.5H7A2.5 2.5 0 0 1 4.5 17V7A2.5 2.5 0 0 1 7 4.5Z"></path>
+                <path d="M8 9.5h8"></path>
+                <path d="M8 12.5h8"></path>
+                <path d="M8 15.5h5"></path>
+              </svg>
+              Сохранение и перенос работы
+            </span>
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body open">
-            <p class="card-body">У игры должны быть <strong>чёткие границы</strong>: где начинается игровое пространство и где оно заканчивается. Студент должен понимать, что внутри круга — другие правила, другие роли, другая логика последствий. Нарушение круга (выход из роли без причины, насмешки над игрой) разрушает механику.</p>
+          </button>
         </div>
+
+        <div class="utility-body" id="utility-body">
+          <div class="utility-grid">
+            <div class="utility-card-box">
+              <p class="card-desc">
+                Воркбук хранит ответы в браузере. Его можно скачать, отправить себе и открыть на другом устройстве.
+              </p>
+              <div class="utility-actions">
+                <button class="utility-btn fire" onclick="exportProgress()">💾 Скачать прогресс (.json)</button>
+                <button class="utility-btn cool" onclick="document.getElementById('import-progress-file').click()">📥 Загрузить прогресс (.json)</button>
+                <button class="utility-btn fire" onclick="exportFilledHtml()">📝 Экспортировать результат (.html)</button>
+                <button class="utility-btn cool" onclick="exportPlainText()">📄 Экспортировать результат (.txt)</button>
+                <button class="utility-btn" onclick="resetWorkbookData()">♻️ Сбросить всё</button>
+                <button class="print-btn" onclick="window.print()">🖨 Распечатать / PDF</button>
+              </div>
+              <div id="save-status" class="save-status">Автосохранение включено.</div>
+              <input id="import-progress-file" class="hidden-file-input" type="file" accept=".json,application/json" onchange="importProgress(event)" />
+            </div>
+
+            <div class="utility-card-box">
+              <div class="micro-guide">
+                <div class="micro-guide-title">Мини-гайд</div>
+                <p>1. Нажмите <strong>«Скачать прогресс (.json)»</strong>.</p>
+                <p>2. Отправьте файл себе на почту или в мессенджер.</p>
+                <p>3. На другом устройстве откройте этот же воркбук и выберите <strong>«Загрузить прогресс (.json)»</strong>.</p>
+              </div>
+              <div class="micro-guide">
+                <div class="micro-guide-title">Мини-гайд: Word</div>
+                <p>1. Нажмите <strong>«Экспортировать результат (.html)»</strong>.</p>
+                <p>2. Сохраните файл.</p>
+                <p>3. Откройте Word → <strong>Файл → Открыть</strong> → выберите файл HTML.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <div class="tabs-bar">
+      <button class="tab-btn section-games active" onclick="switchTab('ig-guide')">🔥 Гайд: Игрофикация</button>
+      <button class="tab-btn section-games" onclick="switchTab('ig-wb')">📓 Тетрадь: Игрофикация</button>
+      <button class="tab-btn section-games" onclick="switchTab('ig-check')">✅ Чек-лист: Игрофикация</button>
+      <button class="tab-btn section-gamif" onclick="switchTab('gm-guide')">🌊 Гайд: Геймификация</button>
+      <button class="tab-btn section-gamif" onclick="switchTab('gm-wb')">📓 Тетрадь: Геймификация</button>
+      <button class="tab-btn section-gamif" onclick="switchTab('gm-check')">✅ Чек-лист: Геймификация</button>
+    </div>
+
+    <main class="page-shell">
+      <section id="ig-guide" class="section active">
+        <div class="hero">
+          <div class="badge fire">🔥 Игрофикация</div>
+          <h1 class="hero-title gradient-fire">Гайд: Игрофикация курса</h1>
+          <p class="hero-subtitle">
+            Превращаем учебный модуль в игру — не ради развлечения, а ради педагогического эффекта,
+            реального выбора и глубокой рефлексии.
+          </p>
+          <div class="note-box fire">
+            <span class="note-label fire">Ключевой тезис.</span>
+            Игра — это не “веселая форма”, а система, в которой учащийся действует в условиях конфликта,
+            ограничений, информации и последствий. Именно так формируется сильное учебное поведение.
+          </div>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Что это такое</div><div class="divider-line"></div></div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-head">
+              <div class="card-icon"><svg class="icon icon-fire" viewBox="0 0 24 24"><path d="M12 2.5c2 3 3.8 4.9 3.8 8.1A5.2 5.2 0 0 1 10.7 16c-1.3 0-2.5-.5-3.4-1.4A5.2 5.2 0 0 1 7.7 10.6c0-1.8 1.1-3.5 3.2-5.1l.5-.4.6.4Z"></path><path d="M12.1 10.8c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5Z"></path></svg></div>
+              <div>
+                <div class="card-title">Игрофикация ≠ “игра на паре”</div>
+                <div class="card-desc">Это не просто веселая разминочка. Это создание отдельного игрового пространства с правилами, ролями, конфликтом и последствиями.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div class="card-icon"><svg class="icon icon-fire" viewBox="0 0 24 24"><path d="M7 14.5V9.5M12 14.5V7.5M17 14.5V11.5"></path><path d="M4.5 18.5h15"></path></svg></div>
+              <div>
+                <div class="card-title">Спектр форматов</div>
+                <div class="card-desc">От простой симуляции до ролевой игры и иммерсивного сценария. Чем выше уровень, тем сильнее роль среды и реальности.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Принципы игрофикации</div><div class="divider-line"></div></div>
+
+        <div class="accordion">
+          <button class="accordion-btn-trigger open" onclick="toggleAccordion(this)">
+            1. Магический круг: игра — отдельный мир
+            <span class="accordion-arrow">▼</span>
+          </button>
+          <div class="accordion-body open">
+            У игры должны быть чёткие границы: где начинается игровое пространство, как студенты понимают правила,
+            когда действуют игровые нормы, а когда — реальные. Это позволяет безопасно рисковать и ошибаться.
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             2. Конфликт и дефицит — сердце игры
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body">Без конфликта нет игры — есть театральная постановка. Конфликт = столкновение интересов или ресурсов. Дефицит = недостаток времени, денег, информации или хода. Именно давление дефицита заставляет мозг работать и принимать реальные решения, а не «правильные» академические ответы.</p>
+          </button>
+          <div class="accordion-body">
+            Без конфликта нет игры. Важно, чтобы у разных ролей были реальные интересы, а ресурсы были ограничены:
+            время, информация, деньги, решения, силы, доступ к данным.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             3. Асимметрия информации
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body">Каждый игрок знает своё, но не знает всей картины. Это воспроизводит реальность: в жизни ни у кого нет полного набора данных. Асимметрия создаёт коммуникацию, переговоры и ошибки — всё то, чему мы хотим научить.</p>
+          </button>
+          <div class="accordion-body">
+            Каждый участник знает что-то своё и не знает всей картины. Это создаёт напряжение, интерес и мыслительную активность.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             4. Последствия без оценки
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body">Самое важное правило: в образовательной игре <strong>нельзя ставить оценки за ход игры</strong>. Оценка убивает риск, а без риска нет обучения. Последствия должны исходить от <em>самой системы</em> (проект провалился, заказчик ушёл, бюджет кончился), а не от преподавателя. Оценивается только <em>рефлексия после игры</em>.</p>
+          </button>
+          <div class="accordion-body">
+            В образовательной игре важно, чтобы последствия были встроены в систему, а не в оценку учителя. Игроки учатся на результатах решения, а не на вердикте “правильно/неправильно”.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             5. Дебрифинг — 70% ценности игры
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body">Большинство преподавателей недооценивают дебрифинг. Именно <em>после</em> игры, когда студенты выходят из роли и обсуждают «почему я так поступил?», происходит настоящее осмысление. Без дебрифинга игра остаётся развлечением. Формат: что произошло → почему именно так → что это означает для реальной практики.</p>
+          </button>
+          <div class="accordion-body">
+            Игра без дебрифинга превращается в аттракцион. Важно обсуждать: что произошло, почему, что это значит в реальности и как это связано с учебными задачами.
+          </div>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаги проектирования</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаги проектирования</div><div class="divider-line"></div></div>
 
-    <div class="steps">
-        <div class="step">
-            <div class="step-num step-num-fire">1</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number fire">1</div>
             <div class="step-content">
-                <div class="step-title">Сформулировать учебный конфликт</div>
-                <div class="step-body">Не «мы изучаем антикризисные коммуникации», а «компания только что облажалась в прямом эфире — что делают PR-менеджер, CEO и журналист?». Конфликт должен быть <em>неоднозначным</em>: чтобы у разных ролей были реально разные правильные ответы.</div>
-                <div class="step-example step-example-fire">Пример: «Заказчик хочет фичу к утру. Лид-разработчик знает, что в коде критический баг. Менеджер не знает ни того, ни другого.»</div>
+              <div class="step-title">Сформулировать учебный конфликт</div>
+              <div class="step-body">Не “мы изучаем коммуникацию”, а “команда выбилась из графика, а клиент требует релиз в ночь” или “все заинтересованы, но цели расходятся”.</div>
+              <div class="step-example fire">Пример: «Заказчик хочет релиз к утру, но разработчики понимают, что в коде критическая ошибка».</div>
             </div>
-        </div>
-        <div class="step">
-            <div class="step-num step-num-fire">2</div>
+          </div>
+
+          <div class="step">
+            <div class="step-number fire">2</div>
             <div class="step-content">
-                <div class="step-title">Определить роли с разными интересами</div>
-                <div class="step-body">Каждая роль должна иметь свою <em>закрытую карточку с целью и ограничениями</em>. Роли не должны быть симметричны. У одного — ресурс, у другого — информация, у третьего — полномочия. Ни у кого нет всего сразу.</div>
-                <div class="step-example step-example-fire">Пример ролей: Заказчик (знает, что контракт разрывается, если нет релиза). Разработчик (знает, что баг есть). PM (не знает ни того, ни другого, но должен принять решение).</div>
+              <div class="step-title">Определить роли с разными интересами</div>
+              <div class="step-body">Каждая роль получает закрытую карточку: своё знание, задачу, ограничения и цель. Игра возникает из столкновения интересов, а не из рандома.</div>
             </div>
-        </div>
-        <div class="step">
-            <div class="step-num step-num-fire">3</div>
+          </div>
+
+          <div class="step">
+            <div class="step-number fire">3</div>
             <div class="step-content">
-                <div class="step-title">Задать ресурсы и дефицит</div>
-                <div class="step-body">Что ограничено? Время (таймер), деньги (жетоны), раунды, количество вопросов, которые можно задать. Дефицит — это давление, которое делает игру настоящей. Без него студенты бесконечно переговариваются и ничего не решают.</div>
+              <div class="step-title">Задать ресурсы и дефицит</div>
+              <div class="step-body">Что ограничено? Время, бюджет, информация, число попыток, доступ к ресурсам, количество вопросов. Дефицит удерживает внимание.</div>
             </div>
-        </div>
-        <div class="step">
-            <div class="step-num step-num-fire">4</div>
+          </div>
+
+          <div class="step">
+            <div class="step-number fire">4</div>
             <div class="step-content">
-                <div class="step-title">Спроектировать систему последствий</div>
-                <div class="step-body">Как игра реагирует на решения? Это могут быть карточки-события («если вы выбрали X — разработчик выгорел, -1 неделя»), изменение доступных ресурсов или просто нарратив мастера игры. Главное — последствия должны быть <em>логичными и ощутимыми</em>.</div>
+              <div class="step-title">Спроектировать систему последствий</div>
+              <div class="step-body">Решения должны приводить к изменениям в ситуации: уходит время, падает репутация, открывается новая информация или возникают новые риски.</div>
             </div>
-        </div>
-        <div class="step">
-            <div class="step-num step-num-fire">5</div>
+          </div>
+
+          <div class="step">
+            <div class="step-number fire">5</div>
             <div class="step-content">
-                <div class="step-title">Запланировать дебрифинг (обязательно)</div>
-                <div class="step-body">Заложите на дебрифинг не менее 20% общего времени игры. Три вопроса: <strong>Что случилось?</strong> (фактически) → <strong>Почему?</strong> (механика решений) → <strong>Как это работает в реальности?</strong> (трансфер знаний).</div>
+              <div class="step-title">Запланировать дебрифинг</div>
+              <div class="step-body">Заложите минимум 20% времени на разбор. Вопросы: Что произошло? Почему так? Что это значит в реальности? Какие решения были эффективными?</div>
             </div>
+          </div>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
 
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ловушка 1.</span>
-        Слишком сложные правила. Если студенты час учат правила игры — это провал. Правила должны умещаться на одной карточке.
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ловушка 2.</span>
-        Оценка за игру. Убивает смелость и желание рисковать. Никогда не ставим оценку за ход игры — только за рефлексию.
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ловушка 3.</span>
-        Нет дебрифинга. «Поиграли — и ладно.» Без разбора игра остаётся аттракционом.
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ловушка 4.</span>
-        Преподаватель — судья. В образовательной игре преподаватель — мастер, фасилитатор. Он не оценивает правильность решений, он управляет последствиями.
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ИГРОФИКАЦИЯ — ЧЕК-ЛИСТ
-     ═══════════════════════════════════════════ -->
-<div id="ig-check" class="section">
-    <div class="section-badge badge-fire">🔥 Игрофикация</div>
-    <div class="section-title gradient-fire">Чек-лист: готова ли игра?</div>
-    <div class="section-subtitle">Пройдите по пунктам перед тем, как запускать игровую сессию в группе. Кликайте — чтобы отмечать.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Дизайн игры</div><div class="divider-line"></div></div>
-
-    <ul class="checklist" id="ig-cl-1">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Учебная цель сформулирована</span>
-                Я знаю, какой навык / понимание студент должен получить именно через эту игру, а не через лекцию.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Конфликт неоднозначен</span>
-                Нет единственно правильного ответа. У разных ролей — реально разные интересы.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Роли с асимметрией информации</span>
-                Каждый игрок получил закрытую карточку. Никто не знает всей картины.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Есть дефицит</span>
-                Время, деньги, раунды, количество ходов — что-то ограничено и это ощутимо.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Правила на одной карточке</span>
-                Механику можно объяснить за 3–5 минут. Студенты не тратят больше 10 минут на вход.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Последствия от системы, не от меня</span>
-                Я как преподаватель не говорю «ты неправильно сделал». Система сама показывает последствие.
-            </div>
-        </li>
-    </ul>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Безопасность и среда</div><div class="divider-line"></div></div>
-
-    <ul class="checklist">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Установлен «магический круг»</span>
-                Студенты понимают: в игре действуют другие правила, это не реальная оценка.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Есть безопасный «стоп»</span>
-                Студент может выйти из роли без последствий, если это некомфортно.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Нет оценки за ход игры</span>
-                За саму игру никто не получает зачёт/незачёт, баллы. Оцениваем только рефлексию.
-            </div>
-        </li>
-    </ul>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Дебрифинг</div><div class="divider-line"></div></div>
-
-    <ul class="checklist">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Заложено время на дебрифинг</span>
-                Минимум 20% от общего времени игровой сессии.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Готовы вопросы для дебрифинга</span>
-                «Что случилось?» → «Почему вы так решили?» → «Как это работает в реальности?»
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-fire">✓</div>
-            <div class="check-text">
-                <span class="check-label">Связка с учебной целью</span>
-                В дебрифинге я явно проговорю, какой навык сейчас был задействован и зачем.
-            </div>
-        </li>
-    </ul>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ИГРОФИКАЦИЯ — РАБОЧАЯ ТЕТРАДЬ
-     ═══════════════════════════════════════════ -->
-<div id="ig-wb" class="section">
-    <div class="section-badge badge-fire">🔥 Игрофикация</div>
-    <div class="section-title gradient-fire">Рабочая тетрадь: проектируем игру</div>
-    <div class="section-subtitle">Заполните каждый блок — и у вас будет готовый скелет образовательной игры для курса.</div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — База</div><div class="divider-line"></div></div>
-
-    <div class="wb-block">
-        <div class="wb-label">Название курса / дисциплины</div>
-        <input class="wb-field wb-field-fire" type="text" placeholder="Например: Управление IT-проектами">
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Тема или модуль, который хочу «проиграть»</div>
-        <input class="wb-field wb-field-fire" type="text" placeholder="Например: Работа с рисками на этапе спринта">
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Учебная цель — что студент поймёт / научится делать через игру?</div>
-        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Студент научится распознавать конфликт интересов между ролями в команде и принимать управленческое решение в условиях неполной информации."></textarea>
-        <div class="wb-tip">Подсказка: сформулируйте через действие — «студент сможет...», «студент научится...»</div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Конфликт и ситуация</div><div class="divider-line"></div></div>
-
-    <div class="wb-block">
-        <div class="wb-label">Опишите ситуацию / сеттинг игры (1–3 предложения для всех игроков)</div>
-        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Команда разработки готовится к релизу. До дедлайна 2 часа. Заказчик ждёт продукт. Но каждый участник знает что-то, чего не знают остальные..."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">В чём главный конфликт? (Чьи интересы сталкиваются?)</div>
-        <textarea class="wb-field wb-field-fire" rows="2" placeholder="Например: Заказчик хочет продукт сегодня. Разработчик знает о баге. PM должен принять решение, не зная ни того ни другого."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Что в дефиците? (Время / деньги / информация / ресурсы)</div>
-        <input class="wb-field wb-field-fire" type="text" placeholder="Например: 20 минут реального времени + 3 жетона на «дополнительный вопрос»">
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Роли</div><div class="divider-line"></div></div>
-
-    <div class="note-box note-fire">
-        <span class="note-label note-label-fire">Принцип.</span>
-        Каждая роль — закрытая карточка. Студент знает свою роль, но не знает закрытых вводных остальных.
-    </div>
-
-    <div class="wb-matrix">
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-fire">Роль 1</div>
-            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
-            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ловушка 1.</span>
+          Слишком сложные правила. Если студенты час учат механику — это провал.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-fire">Роль 2</div>
-            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
-            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ловушка 2.</span>
+          Оценка за игру. Это убивает риск и искренность.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-fire">Роль 3</div>
-            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
-            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ловушка 3.</span>
+          Нет дебрифинга. Игра остаётся аттракционом, а не опытом обучения.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-fire">Роль 4 (если нужна)</div>
-            <input class="wb-field wb-field-fire" type="text" placeholder="Название роли" style="margin-bottom:8px">
-            <textarea class="wb-field wb-field-fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? В чём её цель?"></textarea>
+      </section>
+
+      <section id="ig-wb" class="section">
+        <div class="hero">
+          <div class="badge fire">🔥 Игрофикация</div>
+          <h1 class="hero-title gradient-fire">Рабочая тетрадь: проектируем игру</h1>
+          <p class="hero-subtitle">Заполните блоки — и вы получите каркас образовательной игры для дисциплины или модуля.</p>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Механика и последствия</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — База</div><div class="divider-line"></div></div>
 
-    <div class="wb-block">
-        <div class="wb-label">Формат игры</div>
-        <textarea class="wb-field wb-field-fire" rows="2" placeholder="Ролевая симуляция, кейс-игра с раундами, настольная игра с картами/жетонами, переговоры, суд/дебаты, свой формат..."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Как игра реагирует на решения? (система последствий)</div>
-        <textarea class="wb-field wb-field-fire" rows="3" placeholder="Например: Если PM соглашается с дедлайном без проверки — мастер объявляет: «Релиз вышел с багом. Клиент подаёт претензию. Минус 2 жетона.» Последствие исходит от системы, не от преподавателя."></textarea>
-    </div>
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Название курса / дисциплины</label>
+            <input class="wb-field fire" type="text" placeholder="Например: Управление IT-проектами" />
+          </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 5 — Дебрифинг</div><div class="divider-line"></div></div>
+          <div class="field-block">
+            <label class="field-label">Тема / модуль, который нужно “проиграть”</label>
+            <input class="wb-field fire" type="text" placeholder="Например: Работа с рисками на этапе сдачи релиза" />
+          </div>
 
-    <div class="wb-block">
-        <div class="wb-label">Сколько времени на дебрифинг?</div>
-        <input class="wb-field wb-field-fire" type="text" placeholder="Рекомендуется: не менее 20% от общего времени сессии">
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">3 ключевых вопроса для обсуждения после игры</div>
-        <textarea class="wb-field wb-field-fire" rows="4" placeholder="1. Что произошло? (фактический разбор)
-2. Почему вы так решили? (механика решений)
-3. Как это работает в реальной профессиональной ситуации?"></textarea>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ГЕЙМИФИКАЦИЯ — ГАЙД
-     ═══════════════════════════════════════════ -->
-<div id="gm-guide" class="section">
-    <div class="section-badge badge-cool">🌊 Геймификация</div>
-    <div class="section-title gradient-cool">Гайд: Геймификация курса</div>
-    <div class="section-subtitle">Реструктурируем курс, чтобы он давил на те же нейробиологические кнопки, что и гача-игры. Без бейджиков. На игровой логике.</div>
-
-    <div class="note-box note-cool">
-        <span class="note-label note-label-cool">Ключевой тезис.</span>
-        Почему студент гриндит дейлики в Genshin Impact, а домашку не делает? Потому что гача-игра использует 8 глубоких поведенческих драйверов. Геймификация — это <em>не превращение курса в игру</em>, а реструктурирование его UX так, чтобы задействовать те же механизмы мотивации. Мы не рисуем бейджики — мы перепроектируем логику взаимодействия студента с курсом.
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Плохая vs хорошая геймификация</div><div class="divider-line"></div></div>
-
-    <div class="wb-matrix">
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title" style="color:#ef4444;">❌ Бейджификация (PBL)</div>
-            <div class="card-body">Баллы, значки, таблица лидеров поверх скучного курса. Работает 2 недели — потом студенты игнорируют. Потому что <strong>не меняет структуру взаимодействия</strong>, только вешает декор. Это не геймификация.</div>
+          <div class="field-block">
+            <label class="field-label">Учебная цель — что студент поймёт / научится делать через игру?</label>
+            <textarea class="wb-field fire" rows="3" placeholder="Например: Студент научится распознавать конфликт интересов и выбирать приоритеты в условиях ограничений."></textarea>
+          </div>
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-cool">✅ Игровая логика (Октализ)</div>
-            <div class="card-body">Перестраиваем сам <strong>маршрут студента</strong> через курс: как он получает информацию, какие цели перед ним стоят, что он чувствует в процессе. Это UX-дизайн на поведенческой основе.</div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Конфликт и ситуация</div><div class="divider-line"></div></div>
+
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Опишите ситуацию / сеттинг игры</label>
+            <textarea class="wb-field fire" rows="3" placeholder="Например: Команда разработки готовится к релизу. До дедлайна 2 часа. Заказчик считает, что проблемы не критичны, а разработчики видят риск цепочки ошибок."></textarea>
+          </div>
+
+          <div class="field-block">
+            <label class="field-label">В чём главный конфликт?</label>
+            <textarea class="wb-field fire" rows="2" placeholder="Например: Заказчик хочет быстрый релиз, разработчик знает о критическом баге, менеджер боится потерять клиента и репутацию."></textarea>
+          </div>
+
+          <div class="field-block">
+            <label class="field-label">Что ограничено?</label>
+            <input class="wb-field fire" type="text" placeholder="Например: 20 минут реального времени, 3 жетона и закрытая информация по каждой роли" />
+          </div>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">8 драйверов Октализа (Ю-кай Чоу)</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Роли</div><div class="divider-line"></div></div>
 
-    <div class="note-box note-cool">
-        <span class="note-label note-label-cool">Принцип.</span>
-        Не нужно использовать все 8 драйверов сразу. Выберите 2–3, которые лучше всего совпадают с проблемой вашего курса, и спроектируйте под них конкретный механизм.
-    </div>
+        <div class="matrix-grid">
+          <div class="matrix-card">
+            <div class="matrix-title fire">Роль 1</div>
+            <input class="wb-field fire" type="text" placeholder="Название роли" style="margin-bottom: 0.7rem;" />
+            <textarea class="wb-field fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? Что её мотивирует?"></textarea>
+          </div>
 
-    <div class="accordion">
-        <button class="accordion-btn open" onclick="toggleAccordion(this)">
+          <div class="matrix-card">
+            <div class="matrix-title fire">Роль 2</div>
+            <input class="wb-field fire" type="text" placeholder="Название роли" style="margin-bottom: 0.7rem;" />
+            <textarea class="wb-field fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? Что её мотивирует?"></textarea>
+          </div>
+
+          <div class="matrix-card">
+            <div class="matrix-title fire">Роль 3</div>
+            <input class="wb-field fire" type="text" placeholder="Название роли" style="margin-bottom: 0.7rem;" />
+            <textarea class="wb-field fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? Что её мотивирует?"></textarea>
+          </div>
+
+          <div class="matrix-card">
+            <div class="matrix-title fire">Роль 4</div>
+            <input class="wb-field fire" type="text" placeholder="Название роли" style="margin-bottom: 0.7rem;" />
+            <textarea class="wb-field fire" rows="3" placeholder="Закрытая вводная: что знает только эта роль? Что её мотивирует?"></textarea>
+          </div>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Механика</div><div class="divider-line"></div></div>
+
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Формат игры</label>
+            <textarea class="wb-field fire" rows="2" placeholder="Ролевая симуляция, кейс-игра с раундами, настольная игра, иммерсивный квест, пресс-конференция, брифинг и т.д."></textarea>
+          </div>
+
+          <div class="field-block">
+            <label class="field-label">Как система реагирует на решения?</label>
+            <textarea class="wb-field fire" rows="3" placeholder="Например: Если студент принимает риск и игнорирует сигналы о багаже — меняется статус задачи, появляются последствия, закрывается доступ к ресурсу."></textarea>
+          </div>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 5 — Дебрифинг</div><div class="divider-line"></div></div>
+
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Сколько времени на дебрифинг?</label>
+            <input class="wb-field fire" type="text" placeholder="Рекомендуется: не меньше 20% от общего времени сессии" />
+          </div>
+
+          <div class="field-block">
+            <label class="field-label">Три ключевых вопроса</label>
+            <textarea class="wb-field fire" rows="4" placeholder="1. Что произошло?&#10;2. Почему вы так решили?&#10;3. Как это применимо в реальной профессиональной ситуации?"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section id="ig-check" class="section">
+        <div class="hero">
+          <div class="badge fire">🔥 Игрофикация</div>
+          <h1 class="hero-title gradient-fire">Чек-лист: готова ли игра?</h1>
+          <p class="hero-subtitle">Проверьте, достаточно ли игра построена как система, а не как шоу.</p>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Дизайн игры</div><div class="divider-line"></div></div>
+
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Учебная цель сформулирована</span> Я знаю, какой навык или понимание должен получить студент именно через игру.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Конфликт неоднозначен</span> Нет единственного правильного ответа; роли имеют разные реальные интересы.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Роли с асимметрией информации</span> Каждый участник получает закрытую карточку, никто не знает всей карты.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Есть дефицит</span> Время, деньги, ресурсы, попытки или доступ к данным ограничены.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Правила на одной карточке</span> Механику можно объяснить за 3–5 минут; студенты быстро входят в процесс.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Последствия от системы, не от меня</span> Учитель не оценивает ход игры напрямую; система сама создаёт последствия.</div></li>
+        </ul>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Среда и безопасность</div><div class="divider-line"></div></div>
+
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Есть магический круг</span> Студенты понимают, что это игра, а не строгая экзаменационная ситуация.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Есть безопасный “стоп”</span> Участник может выйти из роли без последствий, если чувствует дискомфорт.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Нет оценки за ход игры</span> Оцениваем рефлексию и понимание, а не саму “игровую агрессию”.</div></li>
+        </ul>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Дебрифинг</div><div class="divider-line"></div></div>
+
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Есть время на дебрифинг</span> Не менее 20% от общих затрат времени сессии.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Готовы вопросы для разбора</span> «Что произошло?», «Почему так?», «Как это работает в реальности?»</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box fire">✓</div><div class="check-text"><span class="check-label">Связка с учебной целью</span> В дебрифинге проводится связь с тем, чему учащиеся должны были научиться.</div></li>
+        </ul>
+      </section>
+
+      <section id="gm-guide" class="section">
+        <div class="hero">
+          <div class="badge cool">🌊 Геймификация</div>
+          <h1 class="hero-title gradient-cool">Гайд: Геймификация курса</h1>
+          <p class="hero-subtitle">
+            Реструктурируем курс так, чтобы он работал на глубинных драйверах мотивации: прогресс, смысл,
+            собственность, социальное влияние и обратная связь.
+          </p>
+          <div class="note-box cool">
+            <span class="note-label cool">Ключевой тезис.</span>
+            Геймификация — это не “наклейки, баллы и таблица лидеров”. Это UX-слой курса, который меняет
+            психологическую архитектуру взаимодействия студента с обучением.
+          </div>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Плохая vs хорошая геймификация</div><div class="divider-line"></div></div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-head">
+              <div class="card-icon"><svg class="icon icon-fire" viewBox="0 0 24 24"><path d="M8 8 16 16"></path><path d="M16 8 8 16"></path><path d="M5.5 18.5h13"></path></svg></div>
+              <div>
+                <div class="card-title">❌ Бейджификация / PBL</div>
+                <div class="card-desc">История поверх дисциплины: баллы, значки и таблица лидеров без изменения логики учебного маршрута. Работает недолго.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div class="card-icon"><svg class="icon icon-cool" viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M3 12h18"></path><path d="M5.5 5.5l13 13"></path></svg></div>
+              <div>
+                <div class="card-title">✅ Игровая логика</div>
+                <div class="card-desc">Перестраиваем сам маршрут студента: как он получает задачи, как видит прогресс, куда идут решения, что происходит после каждого шага.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">8 драйверов Октализа</div><div class="divider-line"></div></div>
+
+        <div class="accordion">
+          <button class="accordion-btn-trigger open" onclick="toggleAccordion(this)">
             🌟 Драйвер 1 — Эпичный смысл и призвание
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body open">
-            <p class="card-body"><strong>Суть:</strong> Студент верит, что делает нечто важное — не просто учится, а участвует в чём-то большом.<br><br>
-            <strong>В курсе:</strong> Дайте студентам «миссию» вместо темы. Не «мы изучаем безопасность данных», а «вы — отдел по защите данных компании, на которую идёт атака». Нарратив курса делает студента участником истории, а не зрителем.<br><br>
-            <strong>Пример механики:</strong> Вводное письмо от «клиента» в начале семестра, которое объясняет, зачем именно им нужны эти знания прямо сейчас.</p>
+          </button>
+          <div class="accordion-body open">
+            Студент должен чувствовать, что работает не “на пару”, а на важную миссию. Вместо “изучаем тему” — “вы — команда, которая создаёт ключевую систему/решение/значимый результат”.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             📈 Драйвер 2 — Развитие и достижения
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Видимый прогресс через реальные, сложные вызовы — не формальные задания.<br><br>
-            <strong>В курсе:</strong> Прогресс должен быть <em>ощутимым</em> и <em>честным</em>. Не «сдал работу — получил 5», а «ты перешёл с уровня «Джун» на «Мид», потому что решил три кейса повышенной сложности». Важна видимая лестница роста.<br><br>
-            <strong>Пример механики:</strong> Карта компетенций, на которой студент видит, что уже умеет, а что нет. Разблокировка следующего уровня — через конкретные доказательства, а не через сдачу теста.</p>
+          </button>
+          <div class="accordion-body">
+            Важно видеть прогресс: карты компетенций, уровни, достижение значимых этапов, подтверждение растущих компетенций. Не “сдал — получил балл”, а “освоил навык — открыл следующий уровень”.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             🎨 Драйвер 3 — Творческий потенциал и обратная связь
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Студент сам выбирает, <em>как</em> решить задачу. Система мгновенно отвечает на его действия.<br><br>
-            <strong>В курсе:</strong> Дайте пространство для личных решений: не один правильный ответ, а вариативные задания. Обратная связь должна быть <em>немедленной</em> и <em>конкретной</em> — не «хорошо», а «вот где ты сорвался и почему».<br><br>
-            <strong>Пример механики:</strong> Задание с открытым финалом: «Предложите три разных решения для одного кейса. Обоснуйте каждое.» Преподаватель даёт фидбек по шагам, а не итоговую оценку.</p>
+          </button>
+          <div class="accordion-body">
+            Студент сам выбирает, как выполнить задачу. Система немедленно даёт отклик, раскрывает сильные стороны, помогает в выборе дальнейшего действия.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             🏠 Драйвер 4 — Собственность и накопление
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Чем больше вложил — тем сложнее бросить. Это психология невозвратных затрат, но в <em>благом</em> смысле.<br><br>
-            <strong>В курсе:</strong> Студент накапливает что-то, что принадлежит только ему: портфолио, «базу знаний», личный профиль компетенций. Чем больше он вложил усилий — тем сильнее держит эта ценность.<br><br>
-            <strong>Пример механики:</strong> Портфолио, которое растёт в течение семестра. Каждое задание добавляет артефакт, который потом можно показать работодателю.</p>
+          </button>
+          <div class="accordion-body">
+            Чем больше студент вложил, тем сложнее бросить. Портфолио, личный проект, “база знаний”, собственные артефакты и материалы создают глубину принадлежности.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             👥 Драйвер 5 — Социальное влияние и причастность
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Люди делают то, что делают другие. Зависть, менторство, командная ответственность — мощнейшие мотиваторы.<br><br>
-            <strong>В курсе:</strong> Создайте систему взаимозависимости. Когда сосед не сдал — страдает вся команда. Или наоборот: «гильдия» сдаёт общий проект и выигрывает вместе.<br><br>
-            <strong>Пример механики:</strong> «Гильдии» или постоянные команды на семестр. Общий командный рейтинг, который зависит от всех. Роль ментора внутри команды (у опытного студента дополнительные очки — за обучение других).</p>
+          </button>
+          <div class="accordion-body">
+            Люди действуют под влиянием социального окружения: сотрудничество, конкуренция, менторство, общий прогресс. Команда может встраиваться в общую систему ролей и статусов.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
             ⏳ Драйвер 6 — Дефицит и нетерпение
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Ограниченный доступ создаёт ценность. Человек хочет то, чего у него мало или что скоро закроется.<br><br>
-            <strong>В курсе:</strong> Лимитируйте доступ к чему-то ценному. Пять мест на «консультацию с преподавателем». Только три попытки для сдачи с оценкой «отлично». Задание-бонус, которое открывается только на 48 часов.<br><br>
-            <strong>Пример механики:</strong> ТЗ не лежит сразу в Moodle. Чтобы его получить, команда должна «выкупить» брифинг — задать правильные вопросы в течение одного занятия.</p>
+          </button>
+          <div class="accordion-body">
+            Ограниченный доступ усиливает ценность. Можно ограничить консультации, специальные материалы, ресурсы или “тайные” уровни, но без вредной манипуляции.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-            🎲 Драйвер 7 — Тайна и непредсказуемость
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
+            🎲 Драйвер 7 — Тайна и неизвестность
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Случайность, сюрпризы и неизвестность удерживают внимание. Мозг не может оторваться от незавершённого паттерна.<br><br>
-            <strong>В курсе:</strong> Вносите непредсказуемые события. «Заказчик изменил требования» в середине проекта. Случайное распределение усложнённых кейсов. Бонусные очки за нестандартное решение — никто не знает заранее, будут ли они.<br><br>
-            <strong>Пример механики:</strong> «Карта событий» — раз в неделю преподаватель вытягивает карту (внешнее изменение среды), которое влияет на все текущие проекты группы.</p>
+          </button>
+          <div class="accordion-body">
+            Неожиданность и сюрприз удерживают интерес. В курсе это может быть “картa событий”, внешнее изменение условий, вариант развития сценария.
+          </div>
         </div>
-    </div>
 
-    <div class="accordion">
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-            🛡 Драйвер 8 — Потери и избегание
+        <div class="accordion">
+          <button class="accordion-btn-trigger" onclick="toggleAccordion(this)">
+            🛡 Драйвер 8 — Потери и избегание потерь
             <span class="accordion-arrow">▼</span>
-        </button>
-        <div class="accordion-body">
-            <p class="card-body"><strong>Суть:</strong> Страх потерять то, что уже есть, мотивирует сильнее, чем надежда на получение нового. Duolingo строится именно на этом — «стрик».<br><br>
-            <strong>В курсе:</strong> Осторожно — этот драйвер токсичен при злоупотреблении. Но в малых дозах работает: накопленные бонусы, которые можно потерять при пропуске. «Страховка» для команды, которую можно потратить один раз.<br><br>
-            <strong>Пример механики:</strong> Командный «жизненный запас» из 3 единиц. Каждый пропуск без предупреждения — минус одна. Потерял все — команда не допускается к финальному бонусному заданию.</p>
+          </button>
+          <div class="accordion-body">
+            Страх потерять накопленный прогресс или ресурс может быть сильным мотиватором. Но им злоупотреблять нельзя; это тонкая область и требует справедливости.
+          </div>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Типичные ошибки</div><div class="divider-line"></div></div>
 
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ошибка 1.</span>
-        Брать все 8 драйверов сразу. Система перегружается и превращается в хаос. Выберите 2–3 под конкретную проблему курса.
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ошибка 2.</span>
-        Геймификация без цели. «Давайте добавим очки» — не стратегия. Сначала: какое <em>поведение</em> студентов нужно изменить?
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ошибка 3.</span>
-        Игнорировать петлю обратной связи. Действие студента должно получать <em>немедленный</em> отклик. Если обратная связь через неделю — магия исчезает.
-    </div>
-    <div class="note-box note-purple">
-        <span class="note-label note-label-purple">⚠ Ошибка 4.</span>
-        Применять драйвер 8 (потери) без компенсации. Чистые штрафы без возможности восстановиться → демотивация и цинизм.
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ГЕЙМИФИКАЦИЯ — ЧЕК-ЛИСТ
-     ═══════════════════════════════════════════ -->
-<div id="gm-check" class="section">
-    <div class="section-badge badge-cool">🌊 Геймификация</div>
-    <div class="section-title gradient-cool">Чек-лист: готова ли геймификация?</div>
-    <div class="section-subtitle">Проверьте систему перед запуском. Кликайте — чтобы отмечать пункты.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Фундамент</div><div class="divider-line"></div></div>
-
-    <ul class="checklist">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Определено целевое поведение</span>
-                Я знаю, что именно студент должен делать добровольно и чаще: сдавать вовремя, помогать другим, читать доп. материалы...
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Выбрано 2–3 драйвера из Октализа</span>
-                Не все восемь — а именно те, которые решают проблему этого конкретного курса и аудитории.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Это не PBL (бейджификация)</span>
-                Я не просто добавляю очки и значки. Я меняю структуру взаимодействия студента с курсом.
-            </div>
-        </li>
-    </ul>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Механика</div><div class="divider-line"></div></div>
-
-    <ul class="checklist">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Есть петля обратной связи (Core Loop)</span>
-                Действие → немедленный отклик системы → следующий шаг. Студент понимает, что произошло и что делать дальше.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Обратная связь быстрая</span>
-                Студент получает отклик в течение одного занятия, максимум 24 часа. Не через неделю.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Прогресс виден студенту</span>
-                Студент в любой момент понимает, на каком он уровне и что нужно сделать, чтобы двигаться вперёд.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Нет скрытых штрафов</span>
-                Если есть потери (драйвер 8) — студент знает правила заранее и есть способ восстановиться.
-            </div>
-        </li>
-    </ul>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Совместимость с курсом</div><div class="divider-line"></div></div>
-
-    <ul class="checklist">
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Базовая методика не сломана</span>
-                Лекции, задания, экзамен остаются. Геймификация — это UX-слой поверх курса, а не замена содержанию.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Система справедлива</span>
-                Все студенты имеют одинаковый доступ к механикам. Нет скрытых преимуществ для отдельных.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Я могу поддерживать систему весь семестр</span>
-                Геймификация требует постоянного управления. Убедитесь, что у вас есть ресурс на это.
-            </div>
-        </li>
-        <li onclick="toggleCheck(this)">
-            <div class="check-box check-box-cool">✓</div>
-            <div class="check-text">
-                <span class="check-label">Есть план на «пиковые» игровые сессии</span>
-                1–2 раза в семестр запланированы игрофицированные модули — чтобы геймификация дала пиковый опыт.
-            </div>
-        </li>
-    </ul>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     ГЕЙМИФИКАЦИЯ — РАБОЧАЯ ТЕТРАДЬ
-     ═══════════════════════════════════════════ -->
-<div id="gm-wb" class="section">
-    <div class="section-badge badge-cool">🌊 Геймификация</div>
-    <div class="section-title gradient-cool">Рабочая тетрадь: проектируем геймификацию</div>
-    <div class="section-subtitle">Заполните каждый блок — и у вас будет готовый план геймификации для вашего курса на основе Октализа.</div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — Диагностика</div><div class="divider-line"></div></div>
-
-    <div class="wb-block">
-        <div class="wb-label">Курс / дисциплина</div>
-        <input class="wb-field wb-field-cool" type="text" placeholder="Название курса">
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Главная проблема курса сейчас (что не работает?)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: Студенты не читают теорию до занятий. Или: Половина группы не сдаёт вовремя. Или: Нет командной работы."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Целевое поведение — что студент должен делать чаще / добровольнее?</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: Студент читает теорию до пары и приходит с вопросами. Студент помогает однокурснику без просьбы преподавателя."></textarea>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Выбор драйверов Октализа</div><div class="divider-line"></div></div>
-
-    <div class="note-box note-cool">
-        <span class="note-label note-label-cool">Инструкция.</span>
-        Ниже — все 8 драйверов. Отметьте те, которые лучше всего подходят под вашу проблему, и запишите конкретный механизм для каждого выбранного.
-    </div>
-
-    <div class="wb-block">
-        <div class="wb-label">🌟 Драйвер 1 — Эпичный смысл (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Какую «миссию» или нарратив я дам студентам? Как сделать, чтобы они чувствовали себя участниками чего-то большого?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">📈 Драйвер 2 — Достижения (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как будет выглядеть видимый прогресс? Уровни? Карта компетенций? Как студент видит своё развитие?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">🎨 Драйвер 3 — Творчество и обратная связь (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как я дам пространство для личных решений? Как ускорю и улучшу обратную связь?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">🏠 Драйвер 4 — Собственность (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент накапливает как своё? Портфолио? Личная база знаний? Что он не захочет потерять?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">👥 Драйвер 5 — Социальное влияние (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Как создать взаимозависимость? Команды? Роль ментора? Общий командный результат?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">⏳ Драйвер 6 — Дефицит (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что я сделаю ограниченным? Время? Попытки? Доступ к консультации? Бонусное задание на 48 часов?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">🎲 Драйвер 7 — Тайна и непредсказуемость (если выбрали)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Какие события я могу сделать неожиданными? Случайные карты? Изменение условий в середине?"></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">🛡 Драйвер 8 — Потери и избегание (если выбрали — с осторожностью)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент может потерять? Как убедиться, что это не демотивирует, а наоборот — включает? Есть ли способ восстановиться?"></textarea>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Петля обратной связи (Core Loop)</div><div class="divider-line"></div></div>
-
-    <div class="note-box note-cool">
-        <span class="note-label note-label-cool">Принцип.</span>
-        Core Loop — это цикл, который студент проходит снова и снова. Действие → Отклик → Мотивация → Следующее действие. Петля должна быть короткой (в идеале — в пределах одного занятия).
-    </div>
-
-    <div class="wb-matrix">
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-cool">1. Действие студента</div>
-            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что делает студент?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ошибка 1.</span>
+          Брать все 8 драйверов сразу. Система перегружается и превращается в хаос.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-green">2. Отклик системы</div>
-            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что происходит сразу после?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ошибка 2.</span>
+          Геймификация без цели. Нельзя просто “прикрутить очки”; сначала нужно определить, какое поведение вы хотите закрепить.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-purple">3. Вознаграждение / прогресс</div>
-            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Что студент получает или открывает?"></textarea>
+        <div class="note-box violet">
+          <span class="note-label violet">⚠ Ошибка 3.</span>
+          Игнорировать петлю обратной связи. Действие студента должно получать быстрый отклик, иначе игра мертва.
         </div>
-        <div class="wb-matrix-cell">
-            <div class="wb-matrix-title title-cool">4. Мотивация к следующему</div>
-            <textarea class="wb-field wb-field-cool" rows="2" placeholder="Почему он захочет повторить это снова?"></textarea>
+      </section>
+
+      <section id="gm-wb" class="section">
+        <div class="hero">
+          <div class="badge cool">🌊 Геймификация</div>
+          <h1 class="hero-title gradient-cool">Рабочая тетрадь: проектируем систему мотивации</h1>
+          <p class="hero-subtitle">Определяем, какие ограничения, цели и сигналы помогут студентам хотеть двигаться вперёд.</p>
         </div>
-    </div>
 
-    <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Интеграция с курсом</div><div class="divider-line"></div></div>
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 1 — Основная проблема</div><div class="divider-line"></div></div>
 
-    <div class="wb-block">
-        <div class="wb-label">Что в курсе я НЕ меняю? (основа остаётся)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Лекции, основные задания, критерии оценки..."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Что именно я меняю / добавляю? (UX-слой геймификации)</div>
-        <textarea class="wb-field wb-field-cool" rows="3" placeholder="Например: Добавляю командные роли, общий рейтинг, еженедельные «карты событий», ограниченный доступ к консультации."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Пиковые точки — когда в семестре будут игровые сессии (игрофикация)?</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Например: 3-я неделя — ролевой кейс, 8-я неделя — краш-тест проекта, 14-я неделя — финальная симуляция."></textarea>
-    </div>
-    <div class="wb-block">
-        <div class="wb-label">Как я буду поддерживать систему в течение семестра? (честный план)</div>
-        <textarea class="wb-field wb-field-cool" rows="2" placeholder="Сколько времени в неделю? Кто помогает? Как обновляется контент?"></textarea>
-    </div>
-</div>
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Какое поведение хотим закрепить?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: студенты регулярно выполняют задания вовремя, помогают друг другу и читают материалы до семинара."></textarea>
+          </div>
 
-<script>
-const STORAGE_KEY = 'igrofication_gamification_workbook_state_v2';
+          <div class="field-block">
+            <label class="field-label">Какая угроза или узкое место у курса?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: низкая вовлечённость, попытки откладывать, слабая самостоятельность, отсутствие регулярного взаимодействия."></textarea>
+          </div>
+        </div>
 
-function getState() {
-    try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { activeTab: 'ig-guide', fields: {}, checks: {}, accordions: {} };
-    } catch (e) {
-        return { activeTab: 'ig-guide', fields: {}, checks: {}, accordions: {} };
-    }
-}
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 2 — Выбор драйверов</div><div class="divider-line"></div></div>
 
-function setStatus(text) {
-    const el = document.getElementById('save-status');
-    if (el) el.textContent = text;
-}
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Какие 2–3 драйвера подходят лучше всего?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: Эпичный смысл, развитие и достижения, социальное влияние."></textarea>
+          </div>
 
-function saveState() {
-    const state = getState();
-    state.activeTab = document.querySelector('.section.active')?.id || 'ig-guide';
+          <div class="field-block">
+            <label class="field-label">Какой конкретный механизм будет работать?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: карта компетенций, уровни, члены команды, общий прогресс в группе, система “сделал действие — получил отклик”."></textarea>
+          </div>
+        </div>
 
-    document.querySelectorAll('.wb-field').forEach((field, index) => {
-        field.dataset.persistId = field.dataset.persistId || 'field-' + index;
-        state.fields[field.dataset.persistId] = field.value;
-    });
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 3 — Петля обратной связи</div><div class="divider-line"></div></div>
 
-    document.querySelectorAll('.checklist li').forEach((item, index) => {
-        item.dataset.persistId = item.dataset.persistId || 'check-' + index;
-        state.checks[item.dataset.persistId] = item.classList.contains('checked');
-    });
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Что делает студент?</label>
+            <input class="wb-field cool" type="text" placeholder="Например: выполняет мини-проект, подаёт комментарий, помогает команде, читает материал" />
+          </div>
 
-    document.querySelectorAll('.accordion').forEach((acc, index) => {
-        acc.dataset.persistId = acc.dataset.persistId || 'acc-' + index;
-        const btn = acc.querySelector('.accordion-btn');
-        state.accordions[acc.dataset.persistId] = btn.classList.contains('open');
-    });
+          <div class="field-block">
+            <label class="field-label">Что система отвечает ему сразу?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: открывается новый уровень, появляется badge/достижение, доступ к следующей задаче, комментарий от преподавателя или сообщение “прогресс считается”."></textarea>
+          </div>
+        </div>
 
-    state.savedAt = new Date().toLocaleString('ru-RU');
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    setStatus('Автосохранено: ' + state.savedAt);
-}
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Шаг 4 — Ресурсы и ограничение</div><div class="divider-line"></div></div>
 
-function restoreState() {
-    const state = getState();
+        <div class="workbook">
+          <div class="field-block">
+            <label class="field-label">Что ограничено?</label>
+            <input class="wb-field cool" type="text" placeholder="Например: доступ к материалам, количество попыток, время на консультацию, баланс сил в команде." />
+          </div>
 
-    if (state.activeTab) switchTab(state.activeTab, true);
+          <div class="field-block">
+            <label class="field-label">Что студент обладает и накапливает?</label>
+            <textarea class="wb-field cool" rows="3" placeholder="Например: уровень, опыт, портфолио, репутация, бонусы, навыки, ценность в группе."></textarea>
+          </div>
+        </div>
+      </section>
 
-    document.querySelectorAll('.wb-field').forEach((field, index) => {
-        field.dataset.persistId = field.dataset.persistId || 'field-' + index;
-        if (state.fields && Object.prototype.hasOwnProperty.call(state.fields, field.dataset.persistId)) {
-            field.value = state.fields[field.dataset.persistId];
-        }
-    });
+      <section id="gm-check" class="section">
+        <div class="hero">
+          <div class="badge cool">🌊 Геймификация</div>
+          <h1 class="hero-title gradient-cool">Чек-лист: готова ли геймификация?</h1>
+          <p class="hero-subtitle">Проверьте, не превращается ли система в декоративные баллы, а в реальный UX-слой обучения.</p>
+        </div>
 
-    document.querySelectorAll('.checklist li').forEach((item, index) => {
-        item.dataset.persistId = item.dataset.persistId || 'check-' + index;
-        const shouldCheck = !!(state.checks && state.checks[item.dataset.persistId]);
-        item.classList.toggle('checked', shouldCheck);
-    });
+        <button class="print-btn" onclick="window.print()">🖨 Распечатать чек-лист</button>
 
-    document.querySelectorAll('.accordion').forEach((acc, index) => {
-        acc.dataset.persistId = acc.dataset.persistId || 'acc-' + index;
-        const shouldOpen = !!(state.accordions && state.accordions[acc.dataset.persistId]);
-        const btn = acc.querySelector('.accordion-btn');
-        const body = acc.querySelector('.accordion-body');
-        btn.classList.toggle('open', shouldOpen);
-        body.classList.toggle('open', shouldOpen);
-    });
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Фундамент</div><div class="divider-line"></div></div>
 
-    if (state.savedAt) setStatus('Восстановлено из автосохранения: ' + state.savedAt);
-}
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Определено целевое поведение</span> Я знаю, какое действие хочу закрепить: вовремя выполнять задание, помогать другим, читать материалы, участвовать в обсуждениях.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Выбрано 2–3 драйвера</span> Не все 8 сразу; важно выбрать те, что решают конкретную проблему этой аудитории.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Это не PBL</span> Я не просто навешиваю таблички и очки, а меняю логическую структуру процесса.</div></li>
+        </ul>
 
-function switchTab(id, skipSave = false) {
-    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    const btn = [...document.querySelectorAll('.tab-btn')].find(b => b.getAttribute('onclick')?.includes("'" + id + "'"));
-    if (btn) btn.classList.add('active');
-    if (!skipSave) saveState();
-}
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Механика</div><div class="divider-line"></div></div>
 
-function toggleAccordion(btn) {
-    btn.classList.toggle('open');
-    btn.nextElementSibling.classList.toggle('open');
-    saveState();
-}
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Есть петля обратной связи</span> Действие → быстрый ответ системы → следующий шаг. Студент понимает, что произошло и что делать дальше.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Обратная связь быстрая</span> В течение занятия или максимум 24 часов. Не ждать неделю.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Прогресс виден студенту</span> Он понимает, где он сейчас, что уже умеет и что нужно, чтобы двигаться дальше.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Нет скрытых штрафов</span> Ограничения заранее известны и справедливы; если есть потери — есть пути восстановления.</div></li>
+        </ul>
 
-function toggleCheck(item) {
-    item.classList.toggle('checked');
-    saveState();
-}
+        <div class="divider"><div class="divider-line"></div><div class="divider-label">Совместимость с курсом</div><div class="divider-line"></div></div>
 
-function exportProgress() {
-    saveState();
-    const state = getState();
-    state.exportType = 'workbook-progress';
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json;charset=utf-8' });
-    downloadBlob(blob, 'workbook-progress.json');
-}
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Базовая методика не сломана</span> Лекции, задания и экзамены остаются. Геймификация — обёртка вокруг содержания, а не подмена.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Система справедлива</span> Все студенты имеют одинаковый доступ к механизмам и правилам.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Я могу держать систему в течение семестра</span> Не забывайте, что геймификация требует постоянного управления и поддержки.</div></li>
+          <li onclick="toggleCheck(this)"><div class="check-box cool">✓</div><div class="check-text"><span class="check-label">Есть план на игровые пики</span> Временные “пиковые” игро��ое события создают сильный опыт без перегруза системы.</div></li>
+        </ul>
+      </section>
+    </main>
 
-function importProgress(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const parsed = JSON.parse(e.target.result);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-            restoreState();
-            setStatus('Прогресс загружен. Можно продолжать работу.');
-            alert('Прогресс загружен. Воркбук восстановлен.');
-        } catch (err) {
-            alert('Не удалось прочитать файл прогресса. Проверьте, что это JSON, скачанный из этого воркбука.');
-        }
-        event.target.value = '';
-    };
-    reader.readAsText(file, 'utf-8');
-}
+    <script>
+      function switchTab(targetId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section) => section.classList.toggle('active', section.id === targetId));
 
-function exportPlainText() {
-    const lines = [];
-    lines.push('Игрофикация и Геймификация — экспорт результата');
-    lines.push('');
-
-    document.querySelectorAll('.section').forEach(section => {
-        const title = section.querySelector('.section-title')?.innerText?.trim();
-        if (title) {
-            lines.push('=== ' + title + ' ===');
-        }
-        section.querySelectorAll('.wb-label').forEach(label => {
-            const field = label.nextElementSibling;
-            if (field && field.classList.contains('wb-field')) {
-                const value = (field.value || '').trim();
-                lines.push(label.innerText.trim());
-                lines.push(value ? value : '[пусто]');
-                lines.push('');
-            }
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach((tab) => {
+          const isActive = tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(targetId);
+          tab.classList.toggle('active', isActive);
         });
-        section.querySelectorAll('.checklist li.checked').forEach(item => {
-            lines.push('[x] ' + item.innerText.replace(/\s+/g, ' ').trim());
-        });
-        if (section.querySelectorAll('.checklist li.checked').length) lines.push('');
-    });
+      }
 
-    const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
-    downloadBlob(blob, 'workbook-result.txt');
-}
-
-function exportFilledHtml() {
-    saveState();
-    const clone = document.documentElement.cloneNode(true);
-
-    clone.querySelectorAll('.wb-field').forEach((field, index) => {
-        const original = document.querySelectorAll('.wb-field')[index];
-        if (field.tagName === 'TEXTAREA') {
-            field.textContent = original.value;
-        } else {
-            field.setAttribute('value', original.value);
+      function toggleAccordion(button) {
+        const trigger = button;
+        const body = trigger.nextElementSibling;
+        const isOpen = trigger.classList.contains('open');
+        trigger.classList.toggle('open', !isOpen);
+        body.classList.toggle('open', !isOpen);
+        const arrow = trigger.querySelector('.accordion-arrow');
+        if (arrow) {
+          arrow.style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
         }
-    });
+      }
 
-    clone.querySelectorAll('.utility-bar, .tabs-bar, .print-btn, .hidden-file-input').forEach(el => el.remove());
-    clone.querySelectorAll('script').forEach(el => el.remove());
+      function toggleUtility(button) {
+        const body = document.getElementById('utility-body');
+        const isOpen = button.classList.contains('open');
+        button.classList.toggle('open', !isOpen);
+        body.style.display = isOpen ? 'none' : 'block';
+      }
 
-    const exportNote = document.createElement('div');
-    exportNote.innerHTML = '<div style="max-width:900px;margin:24px auto 0;padding:0 24px;color:#94a3b8;font-family:Plus Jakarta Sans,sans-serif;font-size:14px;line-height:1.6;">Экспортированная версия воркбука. Этот HTML-файл можно открыть в браузере или через Word: Файл → Открыть → выбрать HTML, затем при необходимости сохранить как .docx.</div>';
-    clone.body.insertBefore(exportNote, clone.body.firstChild);
+      function toggleCheck(item) {
+        item.classList.toggle('checked');
+        const box = item.querySelector('.check-box');
+        if (box) box.textContent = item.classList.contains('checked') ? '✓' : '✓';
+      }
 
-    clone.querySelectorAll('.section').forEach(sec => sec.classList.add('active'));
+      function saveWorkbookData() {
+        const data = {};
+        document.querySelectorAll('input, textarea').forEach((field) => {
+          if (field.classList.contains('wb-field') || field.classList.contains('hidden-file-input')) {
+            data[field.name || field.className || field.id || Math.random().toString(36).slice(2)] = field.value;
+          }
+        });
 
-    const blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], { type: 'text/html;charset=utf-8' });
-    downloadBlob(blob, 'workbook-filled.html');
-}
+        const serial = JSON.stringify(data);
+        localStorage.setItem('gamification-workshop-progress', serial);
+        const status = document.getElementById('save-status');
+        if (status) status.textContent = 'Сохранено в браузере: ' + new Date().toLocaleTimeString('ru-RU');
+      }
 
-function resetWorkbookData() {
-    if (!confirm('Сбросить все сохранённые ответы, чекбоксы и открытые состояния? Это действие нельзя отменить.')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-}
+      function exportProgress() {
+        const data = {};
+        document.querySelectorAll('input, textarea').forEach((field) => {
+          if (field.classList.contains('wb-field')) {
+            const key = field.placeholder || field.id || field.name || Math.random().toString(36).slice(2);
+            data[key] = field.value;
+          }
+        });
 
-function downloadBlob(blob, filename) {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        URL.revokeObjectURL(a.href);
-        a.remove();
-    }, 300);
-}
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gamification-workshop-progress.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        saveWorkbookData();
+      }
 
+      function importProgress(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            document.querySelectorAll('input.wb-field, textarea.wb-field').forEach((field) => {
+              const key = field.placeholder || field.id || field.name || Math.random().toString(36).slice(2);
+              if (Object.prototype.hasOwnProperty.call(data, key)) {
+                field.value = data[key];
+              }
+            });
+            const status = document.getElementById('save-status');
+            if (status) status.textContent = 'Прогресс успешно загружен.';
+          } catch (error) {
+            alert('Ошибка импорта: файл не распознан как JSON.');
+          }
+        };
+        reader.readAsText(file);
+      }
 
-function toggleUtility(btn) {
-    const body = document.getElementById('utility-body');
-    const arrow = btn.querySelector('.accordion-arrow');
-    const isOpen = body.style.display !== 'none';
-    body.style.display = isOpen ? 'none' : 'block';
-    if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
-}
+      function exportFilledHtml() {
+        const clone = document.body.cloneNode(true);
+        clone.querySelector('.utility-bar')?.remove();
+        clone.querySelector('.tabs-bar')?.remove();
+        const html = '<!DOCTYPE html><html lang="ru"><head>' + document.head.innerHTML + '</head><body>' + clone.innerHTML + '</body></html>';
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gamification-workshop-result.html';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
 
-document.addEventListener('input', (e) => {
-    if (e.target.classList.contains('wb-field')) saveState();
-});
+      function exportPlainText() {
+        const text = Array.from(document.querySelectorAll('input.wb-field, textarea.wb-field')).map((field) => {
+          return (field.previousElementSibling && field.previousElementSibling.textContent ? field.previousElementSibling.textContent + '\n' : '') + (field.value || '[пусто]');
+        }).join('\n\n');
 
-document.addEventListener('DOMContentLoaded', () => {
-    restoreState();
-});
-</script>
-</body>
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gamification-workshop-result.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function resetWorkbookData() {
+        if (!confirm('Сбросить все данные воркбука?')) return;
+        document.querySelectorAll('input.wb-field, textarea.wb-field').forEach((field) => {
+          field.value = '';
+        });
+        document.querySelectorAll('.checklist li').forEach((item) => item.classList.remove('checked'));
+        localStorage.removeItem('gamification-workshop-progress');
+        const status = document.getElementById('save-status');
+        if (status) status.textContent = 'Данные очищены.';
+      }
+
+      document.addEventListener('input', () => saveWorkbookData());
+      document.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem('gamification-workshop-progress');
+        if (saved) {
+          try {
+            const data = JSON.parse(saved);
+            Object.entries(data).forEach(([key, value]) => {
+              const target = [...document.querySelectorAll('input.wb-field, textarea.wb-field')].find((field) => {
+                const fieldKey = field.placeholder || field.id || field.name || Math.random().toString(36).slice(2);
+                return fieldKey === key;
+              });
+              if (target) target.value = value;
+            });
+          } catch (error) {
+            console.warn('Не удалось восстановить сохранённый прогресс', error);
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
